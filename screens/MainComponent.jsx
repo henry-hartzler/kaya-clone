@@ -24,7 +24,8 @@ const Main = () => {
                             color: '#fff'
                         },
                         tabBarActiveTintColor: '#fff',
-                        tabBarShowLabel: false
+                        tabBarShowLabel: false,
+                        headerShown: false
                     }}
                     initialRouteName="For You"
                 >
