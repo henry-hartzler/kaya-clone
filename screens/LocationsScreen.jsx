@@ -1,11 +1,20 @@
 import {
     StyleSheet, 
     View, 
-    Text
+    Text,
+    ScrollView
 } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { 
+    SearchBar,
+    Avatar,
+    Card,
+    ListItem
+} from 'react-native-elements';
+import { useSelector } from 'react-redux';
 
 const LocationsScreen = () => {
+    const locations = useSelector(state => state.locations)
+
     return (
         <View style={styles.screen}>
             <View style={styles.header}>
@@ -19,11 +28,23 @@ const LocationsScreen = () => {
             <View style={{ padding: 10 }}>
                 <SearchBar 
                     round
-                    
                     placeholder='Climbs, locations, and people'
                 />
             </View>
-            
+            <ScrollView>
+                <Text style={{ color: "#fff" }}>
+                    Locations
+                </Text>
+                {locations.locationsArray.map( location => (
+                    <ListItem key={location.id}>
+                        <Avatar rounded source={location.image} />
+                        <ListItem.Content>
+                            <ListItem.Title>{location.name}</ListItem.Title>
+                            <ListItem.Subtitle>{location.state}</ListItem.Subtitle>
+                        </ListItem.Content>
+                    </ListItem>
+                ))}
+            </ScrollView>
         </View>
       );
 }
