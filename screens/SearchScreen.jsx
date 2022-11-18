@@ -7,12 +7,17 @@ const SearchScreen = () => {
     const [search, setSearch] = useState('');
     const updateSearch = search => {
         setSearch(search)
-        setFilteredLocations(locations.filter(el => el.name.includes(search)))
+        setFilteredLocations(locations.filter(el => el.name.toLowerCase().includes(search.toLowerCase())))
+        setFilteredClimbs(climbs.filter(el => el.name.toLowerCase().includes(search.toLowerCase())))
     }
 
     const locations = useSelector(state => state.locations.locationsArray)
+    const climbs = useSelector(state => state.climbs.climbsArray)
+    
     const [filteredLocations, setFilteredLocations] = useState(
-        locations.filter(el => el.name.includes('m')))
+        locations.filter(el => el.name.includes('')))
+    const [filteredClimbs, setFilteredClimbs] = useState(
+        climbs.filter(el => el.name.includes('')))
 
 
     return (
@@ -23,8 +28,7 @@ const SearchScreen = () => {
                 value={search}
             />
             <Text>Locations</Text>
-            {filteredLocations 
-            ? filteredLocations.map(location => (
+            {filteredLocations.map(location => (
                 <ListItem 
                     style={styles.listItem} 
                     key={location.id}
@@ -35,9 +39,20 @@ const SearchScreen = () => {
                         <ListItem.Subtitle>{location.state}</ListItem.Subtitle>
                     </ListItem.Content>
                 </ListItem>
-            ))
-            : <Text>No locations yet</Text>}
+            ))}
             <Text>Climbs</Text>
+            {filteredClimbs.map(climb => (
+                <ListItem 
+                    style={styles.listItem} 
+                    key={climb.id}
+                >
+                    <Avatar rounded source={climb.image} />
+                    <ListItem.Content style={styles.listItemContent}>
+                        <ListItem.Title>{climb.name}</ListItem.Title>
+                        <ListItem.Subtitle>{climb.grade}</ListItem.Subtitle>
+                    </ListItem.Content>
+                </ListItem>
+            ))}
         </View>
         
     );
