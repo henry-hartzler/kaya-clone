@@ -3,7 +3,7 @@ import { SearchBar, Avatar, ListItem } from 'react-native-elements';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
     const [search, setSearch] = useState('');
     const updateSearch = search => {
         setSearch(search)
@@ -19,7 +19,6 @@ const SearchScreen = () => {
     const [filteredClimbs, setFilteredClimbs] = useState(
         climbs.filter(el => el.name.includes('')))
 
-
     return (
         <View>
             <SearchBar 
@@ -32,6 +31,9 @@ const SearchScreen = () => {
                 <ListItem 
                     style={styles.listItem} 
                     key={location.id}
+                    onPress={() => {
+                        navigation.navigate('Home')
+                    }}
                 >
                     <Avatar rounded source={location.image} />
                     <ListItem.Content style={styles.listItemContent}>
