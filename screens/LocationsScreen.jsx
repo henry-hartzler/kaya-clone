@@ -7,7 +7,6 @@ import {
     Button
 } from 'react-native';
 import { 
-    SearchBar,
     Avatar,
     ListItem
 } from 'react-native-elements';
