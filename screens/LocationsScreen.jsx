@@ -1,22 +1,23 @@
 import {
     StyleSheet, 
+    SafeAreaView,
     View, 
     Text,
-    ScrollView
+    ScrollView,
+    Button
 } from 'react-native';
 import { 
     SearchBar,
     Avatar,
-    Card,
     ListItem
 } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 
-const LocationsScreen = () => {
+const LocationsScreen = ({ navigation }) => {
     const locations = useSelector(state => state.locations)
 
     return (
-        <View style={styles.screen}>
+        <SafeAreaView style={styles.screen}>
             <View style={styles.header}>
                 <Text style={styles.headerSubtitle}>
                     Hi, Henry
@@ -26,26 +27,33 @@ const LocationsScreen = () => {
                 </Text>
             </View>
             <View style={{ padding: 10 }}>
-                <SearchBar 
-                    round
-                    placeholder='Climbs, locations, and people'
+                <Button
+                    title='Climbs, locations, and people'
+                    onPress={() => navigation.navigate('Search')}
                 />
             </View>
             <ScrollView>
-                <Text style={{ color: "#fff" }}>
-                    Locations
+                <Text style={{ fontSize: 20, color: "#fff" }}>
+                   Locations
                 </Text>
-                {locations.locationsArray.map( location => (
-                    <ListItem key={location.id}>
+
+                {locations.locationsArray.map(location => (
+                    <ListItem 
+                        style={styles.listItem} 
+                        key={location.id}
+                        onPress={() => {
+                            navigation.navigate('Search')
+                        }}
+                    >
                         <Avatar rounded source={location.image} />
-                        <ListItem.Content>
+                        <ListItem.Content style={styles.listItemContent}>
                             <ListItem.Title>{location.name}</ListItem.Title>
                             <ListItem.Subtitle>{location.state}</ListItem.Subtitle>
                         </ListItem.Content>
                     </ListItem>
                 ))}
             </ScrollView>
-        </View>
+        </SafeAreaView>
       );
 }
 
@@ -70,7 +78,16 @@ const styles = StyleSheet.create({
         paddingRight: 50,
         fontSize: 32,
         fontWeight: 'bold'    
+    },
+    listItem: {
+        marginVertical: 5,
+        backgroundColor: '#000',
+        color: '#fff'
+    },
+    listItemContent: {
+        
     }
+
 })
  
 export default LocationsScreen;
