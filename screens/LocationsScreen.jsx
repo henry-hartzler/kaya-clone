@@ -3,18 +3,20 @@ import {
     SafeAreaView,
     View, 
     Text,
-    ScrollView,
-    Button
+    ScrollView
 } from 'react-native';
 import { 
     Avatar,
-    ListItem
+    ListItem, 
+    Button,
+    Icon
 } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 
 const LocationsScreen = ({ navigation }) => {
     const locations = useSelector(state => state.locations)
 
+    
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.header}>
@@ -28,6 +30,13 @@ const LocationsScreen = ({ navigation }) => {
             <View style={{ padding: 10 }}>
                 <Button
                     title='Climbs, locations, and people'
+                    icon={<Icon 
+                        name="search"
+                            type="font-awesome"
+                            size={18}
+                            iconStyle={{ width: 24 }}
+                            color='#fff'
+                        />}
                     onPress={() => navigation.navigate('Search')}
                 />
             </View>
