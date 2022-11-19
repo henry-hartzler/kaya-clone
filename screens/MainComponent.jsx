@@ -1,22 +1,36 @@
 import { StyleSheet, View, Text, Platform } from "react-native";
 import Constants from 'expo-constants';
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import ForYouScreen from "./ForYouScreen";
 import AchievementsScreen from "./AchievementsScreen";
 import LocationsScreen from "./LocationsScreen";
 import ProfileScreen from "./ProfileScreen";
+import SearchScreen from "./SearchScreen";
+import { getFocusedRouteNameFromRoute, NavigationContainer } from "@react-navigation/native";
+
+function getHeaderTitle(route) {
+    const routeName = getFocusedRouteNameFromRoute(route) ?? 'For You'
+
+    switch(routeName) {
+        case 'For You':
+            return 'For You';
+        case 'Achievements':
+            return 'Achievements';
+        case 'Locations':
+            return 'Locations';
+        case 'Profile': 
+            return 'Profile';
+        case 'Search': 
+            return 'Search';
+    }
+}
 
 const Tab = createBottomTabNavigator();
 
-const Main = () => {
+const HomeTabs = () => {
     return (
-        <>
-            <View style={{ 
-                flex: 1,
-                paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
-            }}>
                 <Tab.Navigator 
                     screenOptions={{
                         tabBarStyle: {
@@ -94,10 +108,30 @@ const Main = () => {
                         }}  
                     />
                 </Tab.Navigator>
-            </View>
-        </>
+            
       );
 }
+
+const Stack = createNativeStackNavigator()
+
+const Main = () => {
+    return (
+        <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false
+                }}
+            >
+               <Stack.Screen
+                   name="Home"
+                   component={HomeTabs}
+               />
+                <Stack.Screen name="Search" component={SearchScreen} />
+            </Stack.Navigator>
+        </View>
+    )
+}
+        
 
 const styles = StyleSheet.create({
     mainFooter: {
