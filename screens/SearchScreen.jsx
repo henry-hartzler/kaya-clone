@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native"
+import { Text, View, StyleSheet, FlatList } from "react-native"
 import { SearchBar, Avatar, ListItem } from "react-native-elements"
 import { useState } from "react"
 import { useSelector } from "react-redux"
@@ -29,13 +29,13 @@ const SearchScreen = ({ navigation }) => {
 		climbs.filter((el) => el.name.includes(""))
 	)
 
-	const LocationsMap = () => {
-		return filteredLocations.map((location) => (
+	const renderLocationItem = ({ item: location }) => {
+		return (
 			<ListItem
 				style={styles.listItem}
 				key={location.id}
 				onPress={() => {
-					navigation.navigate("Home")
+					navigation.navigate("LocationInfo", { location })
 				}}
 			>
 				<Avatar
@@ -47,11 +47,11 @@ const SearchScreen = ({ navigation }) => {
 					<ListItem.Subtitle>{location.state}</ListItem.Subtitle>
 				</ListItem.Content>
 			</ListItem>
-		))
+		)
 	}
 
-	const ClimbsMap = () => {
-		return filteredClimbs.map((climb) => (
+	const renderClimbItem = ({ item: climb }) => {
+		return (
 			<ListItem
 				style={styles.listItem}
 				key={climb.id}
@@ -65,7 +65,7 @@ const SearchScreen = ({ navigation }) => {
 					<ListItem.Subtitle>{climb.grade}</ListItem.Subtitle>
 				</ListItem.Content>
 			</ListItem>
-		))
+		)
 	}
 
 	return (
@@ -79,7 +79,11 @@ const SearchScreen = ({ navigation }) => {
 			{search && filteredLocations.length !== 0 ? (
 				<>
 					<Text>Locations</Text>
-					<LocationsMap />
+					<FlatList
+						data={filteredLocations}
+						renderItem={renderLocationItem}
+						keyExtractor={(item) => item.id.toString()}
+					/>
 				</>
 			) : (
 				<Text>No locations yet</Text>
@@ -87,7 +91,11 @@ const SearchScreen = ({ navigation }) => {
 			{search && filteredClimbs.length !== 0 ? (
 				<>
 					<Text>Climbs</Text>
-					<ClimbsMap />
+					<FlatList
+						data={filteredClimbs}
+						renderItem={renderClimbItem}
+						keyExtractor={(item) => item.id.toString()}
+					/>
 				</>
 			) : (
 				<Text>No climbs yet</Text>

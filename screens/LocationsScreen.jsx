@@ -1,11 +1,4 @@
-import {
-	StyleSheet,
-	SafeAreaView,
-	View,
-	Text,
-	ScrollView,
-	FlatList,
-} from "react-native"
+import { StyleSheet, SafeAreaView, View, Text, FlatList } from "react-native"
 import { Avatar, ListItem, Button, Icon } from "react-native-elements"
 import { useSelector } from "react-redux"
 
