@@ -9,24 +9,6 @@ import LocationsScreen from "./LocationsScreen"
 import ProfileScreen from "./ProfileScreen"
 import SearchScreen from "./SearchScreen"
 import LocationInfoScreen from "./LocationInfoScreen"
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native"
-
-function getHeaderTitle(route) {
-	const routeName = getFocusedRouteNameFromRoute(route) ?? "For You"
-
-	switch (routeName) {
-		case "For You":
-			return "For You"
-		case "Achievements":
-			return "Achievements"
-		case "Locations":
-			return "Locations"
-		case "Profile":
-			return "Profile"
-		case "Search":
-			return "Search"
-	}
-}
 
 const Tab = createBottomTabNavigator()
 
