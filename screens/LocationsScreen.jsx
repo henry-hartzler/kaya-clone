@@ -30,6 +30,7 @@ const LocationsScreen = ({ navigation }) => {
             <View style={{ padding: 10 }}>
                 <Button
                     title='Climbs, locations, and people'
+                    buttonStyle={{ backgroundColor: '#424449'}}
                     icon={<Icon 
                         name="search"
                             type="font-awesome"
@@ -37,6 +38,8 @@ const LocationsScreen = ({ navigation }) => {
                             iconStyle={{ width: 24 }}
                             color='#fff'
                         />}
+                    iconPosition='left'
+                    raised
                     onPress={() => navigation.navigate('Search')}
                 />
             </View>
