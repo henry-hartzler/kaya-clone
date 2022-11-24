@@ -63,7 +63,9 @@ const styles = StyleSheet.create({
 	screen: {
 		backgroundColor: "#000",
 		flex: 1,
-		padding: 10,
+
+		paddingVertical: 10,
+		paddingHorizontal: 20,
 		justifyContent: "flex-start",
 	},
 	header: {
