@@ -114,27 +114,6 @@ const styles = StyleSheet.create({
 		padding: 10,
 		justifyContent: "flex-start",
 	},
-	header: {
-		marginTop: 10,
-		marginLeft: 10,
-	},
-	headerSubtitle: {
-		color: "#fff",
-		paddingBottom: 5,
-		fontSize: 22,
-	},
-	headerTitle: {
-		color: "#FFFF00",
-		paddingRight: 50,
-		fontSize: 32,
-		fontWeight: "bold",
-	},
-	listItem: {
-		marginVertical: 5,
-		backgroundColor: "#000",
-		color: "#fff",
-	},
-	listItemContent: {},
 })
 
 export default SearchScreen
