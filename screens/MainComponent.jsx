@@ -3,10 +3,9 @@ import Constants from "expo-constants"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Icon } from "react-native-elements"
-import ForYouScreen from "./ForYouScreen"
-import AchievementsScreen from "./AchievementsScreen"
+import ToDoScreen from "./ToDoScreen"
 import LocationsScreen from "./LocationsScreen"
-import ProfileScreen from "./ProfileScreen"
+import SendsScreen from "./SendsScreen"
 import SearchScreen from "./SearchScreen"
 import LocationInfoScreen from "./LocationInfoScreen"
 
@@ -24,32 +23,16 @@ const HomeTabs = () => {
 				tabBarShowLabel: false,
 				headerShown: false,
 			}}
-			initialRouteName='For You'
+			initialRouteName='Locations'
 		>
 			<Tab.Screen
 				name='For You'
-				component={ForYouScreen}
+				component={ToDoScreen}
 				options={{
-					title: "For You",
+					title: "To Do",
 					tabBarIcon: ({ color }) => (
 						<Icon
-							name='play'
-							type='font-awesome'
-							size={24}
-							iconStyle={{ width: 24 }}
-							color={color}
-						/>
-					),
-				}}
-			/>
-			<Tab.Screen
-				name='Achievements'
-				component={AchievementsScreen}
-				options={{
-					title: "Achievements",
-					tabBarIcon: ({ color }) => (
-						<Icon
-							name='trophy'
+							name='list'
 							type='font-awesome'
 							size={24}
 							iconStyle={{ width: 24 }}
@@ -75,13 +58,13 @@ const HomeTabs = () => {
 				}}
 			/>
 			<Tab.Screen
-				name='Profile'
-				component={ProfileScreen}
+				name='Sends'
+				component={SendsScreen}
 				options={{
-					title: "Profile",
+					title: "Sends",
 					tabBarIcon: ({ color }) => (
 						<Icon
-							name='user'
+							name='check'
 							type='font-awesome'
 							size={24}
 							iconStyle={{ width: 24 }}

@@ -33,7 +33,7 @@ const RenderLocation = ({ location }) => {
 					onPress={() => console.log("pressed")}
 				/>
 				<Icon
-					name='pencil'
+					name='plus'
 					type='font-awesome'
 					color='#5637DD'
 					raised
