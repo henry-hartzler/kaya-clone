@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FlatList, StyleSheet, Text, View, Button } from "react-native"
 import RenderLocation from "../features/locations/RenderLocation"
 import RenderClimbsByLocation from "../features/climbs/RenderClimbsByLocation"
+import ScreenHeader from "../features/header/ScreenHeader"
 
 const LocationInfoScreen = ({ route }) => {
 	const { location } = route.params
@@ -10,6 +11,7 @@ const LocationInfoScreen = ({ route }) => {
 
 	return (
 		<View>
+			<ScreenHeader />
 			<RenderLocation location={location} />
 			<RenderClimbsByLocation locations={location} />
 		</View>
