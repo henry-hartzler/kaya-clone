@@ -8,6 +8,7 @@ import LocationsScreen from "./LocationsScreen"
 import SendsScreen from "./SendsScreen"
 import SearchScreen from "./SearchScreen"
 import LocationInfoScreen from "./LocationInfoScreen"
+import ClimbInfoScreen from "./ClimbInfoScreen"
 
 const Tab = createBottomTabNavigator()
 
@@ -105,6 +106,13 @@ const Main = () => {
 					component={LocationInfoScreen}
 					options={({ route }) => ({
 						title: route.params.location.name,
+					})}
+				/>
+				<Stack.Screen
+					name='ClimbInfo'
+					component={ClimbInfoScreen}
+					options={({ route }) => ({
+						title: route.params.climb.name,
 					})}
 				/>
 			</Stack.Navigator>

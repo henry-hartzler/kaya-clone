@@ -55,6 +55,9 @@ const SearchScreen = ({ navigation }) => {
 			<ListItem
 				style={styles.listItem}
 				key={climb.id}
+				onPress={() => {
+					navigation.navigate("ClimbInfo", { climb })
+				}}
 			>
 				<Avatar
 					rounded

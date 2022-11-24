@@ -6,12 +6,19 @@ import RenderClimbsByLocation from "../features/climbs/RenderClimbsByLocation"
 
 const LocationInfoScreen = ({ route }) => {
 	const { location } = route.params
+	const { climb } = route.params
 	const dispatch = useDispatch()
 
 	return (
 		<View>
+			{console.log(route)}
+			{console.log(location)}
+			{console.log(climb)}
 			<RenderLocation location={location} />
-			<RenderClimbsByLocation locations={location} />
+			<RenderClimbsByLocation
+				locations={location}
+				climb={climb}
+			/>
 		</View>
 	)
 }

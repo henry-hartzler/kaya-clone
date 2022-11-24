@@ -2,7 +2,7 @@ import { Avatar, ListItem } from "react-native-elements"
 import { FlatList, StyleSheet } from "react-native"
 import { useSelector } from "react-redux"
 
-const RenderClimbsByLocation = ({ locations }) => {
+const RenderClimbsByLocation = ({ locations, navigation, climbPage }) => {
 	const climbs = useSelector((state) => state.climbs.climbsArray)
 
 	const filteredClimbs = climbs.filter((el) => el.location === locations.name)
@@ -12,6 +12,9 @@ const RenderClimbsByLocation = ({ locations }) => {
 			<ListItem
 				style={styles.listItem}
 				key={climb.id}
+				onPress={() => {
+					navigation.navigate("ClimbInfo", { climbPage })
+				}}
 			>
 				<Avatar
 					rounded

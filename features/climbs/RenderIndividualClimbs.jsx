@@ -7,25 +7,33 @@ import {
 	Share,
 	Image,
 } from "react-native"
-import { Card, Icon } from "react-native-elements"
+import { Card, Icon, Rating } from "react-native-elements"
 
-const RenderLocation = ({ location }) => {
-	return location ? (
+const RenderIndividualClimbs = ({ climb }) => {
+	return climb ? (
 		<Card style={{ flex: 1 }}>
 			<Card.Title h1>
-				{location.name}, {location.state}
+				{climb.name}, {climb.grade}
 			</Card.Title>
 			<Card.Divider />
 			<View style={styles.cardImageView}>
 				<Image
 					style={styles.cardImage}
 					resizeMode='contain'
-					source={location.image}
+					source={climb.image}
+				/>
+			</View>
+			<Card.Title h4>{climb.location}</Card.Title>
+			<View style={{ marginBottom: 20 }}>
+				<Rating
+					startingValue={climb.rating}
+					readonly
+					style={{ alignItems: "center" }}
 				/>
 			</View>
 			<View style={styles.cardRow}>
 				<Icon
-					name='heart-o'
+					name='list'
 					type='font-awesome'
 					color='#f50'
 					raised
@@ -33,7 +41,7 @@ const RenderLocation = ({ location }) => {
 					onPress={() => console.log("pressed")}
 				/>
 				<Icon
-					name='plus'
+					name='check'
 					type='font-awesome'
 					color='#5637DD'
 					raised
@@ -67,4 +75,4 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default RenderLocation
+export default RenderIndividualClimbs
