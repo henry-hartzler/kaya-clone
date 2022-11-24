@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import { Card, Icon, Rating } from "react-native-elements"
 
-const RenderIndividualClimbs = ({ climb }) => {
+const RenderIndividualClimbs = ({ climb, isToDo, markToDo, isSend }) => {
 	return climb ? (
 		<Card>
 			<Card.Title h2>
@@ -35,15 +35,15 @@ const RenderIndividualClimbs = ({ climb }) => {
 				<Icon
 					name='list'
 					type='font-awesome'
-					color='#f50'
+					color={isToDo ? "#3388FF" : "#808080"}
 					raised
 					reverse
-					onPress={() => console.log("pressed")}
+					onPress={() => markToDo()}
 				/>
 				<Icon
 					name='check'
 					type='font-awesome'
-					color='#5637DD'
+					color={isSend ? "#50C878" : "#808080"}
 					raised
 					reverse
 					onPress={() => console.log("pressed")}

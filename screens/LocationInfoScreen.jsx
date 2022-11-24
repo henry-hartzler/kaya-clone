@@ -7,6 +7,7 @@ import ScreenHeader from "../features/header/ScreenHeader"
 
 const LocationInfoScreen = ({ route }) => {
 	const { location } = route.params
+
 	const dispatch = useDispatch()
 
 	return (
