@@ -10,7 +10,7 @@ const LocationInfoScreen = ({ route }) => {
 	const dispatch = useDispatch()
 
 	return (
-		<View>
+		<View style={{ backgroundColor: "#000", flex: 1 }}>
 			<ScreenHeader />
 			<RenderLocation location={location} />
 			<RenderClimbsByLocation locations={location} />

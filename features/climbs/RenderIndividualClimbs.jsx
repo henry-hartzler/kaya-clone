@@ -12,7 +12,7 @@ import { Card, Icon, Rating } from "react-native-elements"
 const RenderIndividualClimbs = ({ climb }) => {
 	return climb ? (
 		<Card style={{ flex: 1 }}>
-			<Card.Title h1>
+			<Card.Title h2>
 				{climb.name}, {climb.grade}
 			</Card.Title>
 			<Card.Divider />

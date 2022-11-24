@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, FlatList } from "react-native"
 import { SearchBar, Avatar, ListItem } from "react-native-elements"
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import ScreenHeader from "../features/header/ScreenHeader"
 
 const SearchScreen = ({ navigation }) => {
 	const [search, setSearch] = useState("")
@@ -72,37 +73,44 @@ const SearchScreen = ({ navigation }) => {
 	}
 
 	return (
-		<View>
-			<SearchBar
-				placeholder='Type here'
-				onChangeText={updateSearch}
-				value={search}
-			/>
+		<View style={styles.screen}>
+			<ScreenHeader />
+			<View style={styles.view}>
+				<SearchBar
+					placeholder='Type here'
+					onChangeText={updateSearch}
+					value={search}
+				/>
+			</View>
 
-			{search && filteredLocations.length !== 0 ? (
-				<>
-					<Text>Locations</Text>
-					<FlatList
-						data={filteredLocations}
-						renderItem={renderLocationItem}
-						keyExtractor={(item) => item.id.toString()}
-					/>
-				</>
-			) : (
-				<Text>No locations yet</Text>
-			)}
-			{search && filteredClimbs.length !== 0 ? (
-				<>
-					<Text>Climbs</Text>
-					<FlatList
-						data={filteredClimbs}
-						renderItem={renderClimbItem}
-						keyExtractor={(item) => item.id.toString()}
-					/>
-				</>
-			) : (
-				<Text>No climbs yet</Text>
-			)}
+			<View style={styles.view}>
+				{search && filteredLocations.length !== 0 ? (
+					<>
+						<Text style={styles.text}>Locations</Text>
+						<FlatList
+							data={filteredLocations}
+							renderItem={renderLocationItem}
+							keyExtractor={(item) => item.id.toString()}
+						/>
+					</>
+				) : (
+					<Text style={styles.text}>No locations yet</Text>
+				)}
+			</View>
+			<View style={styles.view}>
+				{search && filteredClimbs.length !== 0 ? (
+					<>
+						<Text style={styles.text}>Climbs</Text>
+						<FlatList
+							data={filteredClimbs}
+							renderItem={renderClimbItem}
+							keyExtractor={(item) => item.id.toString()}
+						/>
+					</>
+				) : (
+					<Text style={styles.text}>No climbs yet</Text>
+				)}
+			</View>
 		</View>
 	)
 }
@@ -111,8 +119,33 @@ const styles = StyleSheet.create({
 	screen: {
 		backgroundColor: "#000",
 		flex: 1,
-		padding: 10,
-		justifyContent: "flex-start",
+	},
+	view: {
+		marginTop: 15,
+		marginHorizontal: 20,
+	},
+	text: {
+		color: "#fff",
+	},
+	header: {
+		marginTop: 10,
+		marginLeft: 10,
+	},
+	headerSubtitle: {
+		color: "#fff",
+		paddingBottom: 5,
+		fontSize: 22,
+	},
+	headerTitle: {
+		color: "#FFFF00",
+		paddingRight: 50,
+		fontSize: 32,
+		fontWeight: "bold",
+	},
+	listItem: {
+		marginVertical: 5,
+		backgroundColor: "#000",
+		color: "#fff",
 	},
 })
 

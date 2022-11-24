@@ -9,7 +9,7 @@ const ClimbInfoScreen = ({ route }) => {
 	const dispatch = useDispatch()
 
 	return (
-		<View>
+		<View style={{ backgroundColor: "#000", flex: 1 }}>
 			<ScreenHeader />
 			<RenderIndividualClimbs climb={climb} />
 		</View>
