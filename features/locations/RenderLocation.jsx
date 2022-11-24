@@ -12,7 +12,7 @@ import { Card, Icon } from "react-native-elements"
 const RenderLocation = ({ location }) => {
 	return location ? (
 		<Card style={{ flex: 1 }}>
-			<Card.Title h1>
+			<Card.Title h2>
 				{location.name}, {location.state}
 			</Card.Title>
 			<Card.Divider />
