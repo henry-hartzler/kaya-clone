@@ -1,35 +1,76 @@
-import { View, Text, StyleSheet, FlatList } from "react-native"
+import {
+	View,
+	Text,
+	StyleSheet,
+	FlatList,
+	TouchableOpacity,
+	Alert,
+} from "react-native"
 import { ListItem, Avatar } from "react-native-elements"
-import { useSelector } from "react-redux"
-import { useNavigation } from "@react-navigation/native"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleToDo } from "../features/ToDo/toDoSlice"
+import { SwipeRow } from "react-native-swipe-list-view"
 
-const ForYouScreen = () => {
+const ToDoScreen = ({ navigation }) => {
+	const { climbsArray } = useSelector((state) => state.climbs)
 	const toDos = useSelector((state) => state.toDos)
-	const navigation = useNavigation()
+	const dispatch = useDispatch()
+
+	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs.id))
 
 	const renderClimbItem = ({ item: climb }) => {
 		return (
-			<ListItem
-				style={styles.listItem}
-				key={climb.id}
-				onPress={() => {
-					navigation.navigate("ClimbInfo", { climb })
-				}}
-			>
-				<Avatar
-					rounded
-					source={climb.image}
-				/>
-				<ListItem.Content style={styles.listItemContent}>
-					<ListItem.Title>{climb.name}</ListItem.Title>
-					<ListItem.Subtitle>{climb.grade}</ListItem.Subtitle>
-				</ListItem.Content>
-			</ListItem>
+			<SwipeRow rightOpenValue={-100}>
+				<View style={styles.deleteView}>
+					<TouchableOpacity
+						style={styles.deleteTouchable}
+						onPress={() =>
+							Alert.alert(
+								"Delete To Do?",
+								`Remove ${climb.name} from To Do List?`,
+								[
+									{
+										text: "Cancel",
+										style: "cancel",
+									},
+									{
+										text: "OK",
+										onPress: () => dispatch(toggleToDo(climb.id)),
+									},
+								],
+								{ cancelable: false }
+							)
+						}
+					>
+						<Text style={styles.deleteText}>Delete</Text>
+					</TouchableOpacity>
+				</View>
+				<View>
+					<ListItem
+						style={styles.listItem}
+						key={climb.id}
+						onPress={() => {
+							navigation.navigate("ClimbInfo", { climb })
+						}}
+					>
+						<Avatar
+							rounded
+							source={climb.image}
+						/>
+						<ListItem.Content style={styles.listItemContent}>
+							<ListItem.Title>
+								{climb.name}, {climb.grade}
+							</ListItem.Title>
+							<ListItem.Subtitle>{climb.location}</ListItem.Subtitle>
+						</ListItem.Content>
+					</ListItem>
+				</View>
+			</SwipeRow>
 		)
 	}
 	return (
 		<FlatList
-			data={toDos}
+			data={toDoClimbs}
 			renderItem={renderClimbItem}
 			keyExtractor={(item) => item.id.toString()}
 		/>
@@ -37,11 +78,50 @@ const ForYouScreen = () => {
 }
 
 const styles = StyleSheet.create({
+	deleteView: {
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignItems: "center",
+		flex: 1,
+	},
+	deleteTouchable: {
+		backgroundColor: "red",
+		height: "100%",
+		justifyContent: "center",
+	},
+	deleteText: {
+		color: "white",
+		fontWeight: "700",
+		textAlign: "center",
+		fontSize: 16,
+		width: 100,
+	},
 	listItem: {
 		marginVertical: 5,
 		backgroundColor: "#000",
 		color: "#fff",
 	},
-	listItemContent: {},
+	screen: {
+		backgroundColor: "#000",
+		flex: 1,
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		justifyContent: "flex-start",
+	},
+	header: {
+		marginTop: 10,
+		marginLeft: 10,
+	},
+	headerSubtitle: {
+		color: "#fff",
+		paddingBottom: 5,
+		fontSize: 22,
+	},
+	headerTitle: {
+		color: "#FFFF00",
+		paddingRight: 50,
+		fontSize: 32,
+		fontWeight: "bold",
+	},
 })
-export default ForYouScreen
+export default ToDoScreen

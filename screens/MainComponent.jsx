@@ -27,7 +27,7 @@ const HomeTabs = () => {
 			initialRouteName='Locations'
 		>
 			<Tab.Screen
-				name='For You'
+				name='To Do'
 				component={ToDoScreen}
 				options={{
 					title: "To Do",

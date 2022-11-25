@@ -34,7 +34,7 @@ const LocationsScreen = ({ navigation }) => {
 			</View>
 			<View style={{ padding: 10 }}>
 				<Button
-					title='Climbs, locations, and people'
+					title='Search by climbs and locations'
 					buttonStyle={{ backgroundColor: "#424449" }}
 					icon={
 						<Icon
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
 	screen: {
 		backgroundColor: "#000",
 		flex: 1,
-
 		paddingVertical: 10,
 		paddingHorizontal: 20,
 		justifyContent: "flex-start",

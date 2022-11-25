@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FlatList, StyleSheet, Text, View, Button } from "react-native"
 import RenderIndividualClimbs from "../features/climbs/RenderIndividualClimbs"
 import ScreenHeader from "../features/header/ScreenHeader"
-import { addToDo } from "../features/ToDo/toDoSlice"
+import { toggleToDo } from "../features/ToDo/toDoSlice"
 
 const ClimbInfoScreen = ({ route }) => {
 	const { climb } = route.params
@@ -16,7 +16,7 @@ const ClimbInfoScreen = ({ route }) => {
 			<RenderIndividualClimbs
 				climb={climb}
 				isToDo={toDos.includes(climb.id)}
-				markToDo={() => dispatch(addToDo(climb.id))}
+				markToDo={() => dispatch(toggleToDo(climb.id))}
 			/>
 		</View>
 	)

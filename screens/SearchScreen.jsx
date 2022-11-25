@@ -77,7 +77,7 @@ const SearchScreen = ({ navigation }) => {
 			<ScreenHeader />
 			<View style={styles.view}>
 				<SearchBar
-					placeholder='Type here'
+					placeholder='Search by climbs and locations'
 					onChangeText={updateSearch}
 					value={search}
 				/>

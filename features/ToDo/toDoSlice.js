@@ -4,7 +4,7 @@ const toDoSlice = createSlice({
 	name: "toDo",
 	initialState: [],
 	reducers: {
-		addToDo: (toDo, action) => {
+		toggleToDo: (toDo, action) => {
 			if (toDo.includes(action.payload)) {
 				return toDo.filter((climb) => climb !== action.payload)
 			} else {
@@ -14,5 +14,5 @@ const toDoSlice = createSlice({
 	},
 })
 
-export const { addToDo } = toDoSlice.actions
+export const { toggleToDo } = toDoSlice.actions
 export const toDoReducer = toDoSlice.reducer
