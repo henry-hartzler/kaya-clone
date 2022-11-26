@@ -38,7 +38,7 @@ const ToDoScreen = ({ navigation }) => {
 						style={styles.addTouchable}
 						onPress={() =>
 							Alert.alert(
-								"Congrats on your send!",
+								`Congrats on your send! 👊`,
 								`Did you send ${climb.name}?`,
 								[
 									{
