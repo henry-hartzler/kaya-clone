@@ -29,7 +29,7 @@ const SendsScreen = ({ navigation }) => {
 						onPress={() =>
 							Alert.alert(
 								"Delete Send?",
-								`Remove ${climb.name} from Sends List?`,
+								`Remove ${climb.name} from Sends?`,
 								[
 									{
 										text: "Cancel",
@@ -78,7 +78,7 @@ const SendsScreen = ({ navigation }) => {
 	return (
 		<View style={styles.screen}>
 			<View>
-				<Text style={styles.headerTitle}>Sends List</Text>
+				<Text style={styles.headerTitle}>Sends</Text>
 			</View>
 			<FlatList
 				data={sendClimbs}
