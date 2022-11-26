@@ -69,11 +69,16 @@ const ToDoScreen = ({ navigation }) => {
 		)
 	}
 	return (
-		<FlatList
-			data={toDoClimbs}
-			renderItem={renderClimbItem}
-			keyExtractor={(item) => item.id.toString()}
-		/>
+		<View style={styles.screen}>
+			<View style={styles.header}>
+				<Text style={styles.headerTitle}>To Do List</Text>
+			</View>
+			<FlatList
+				data={toDoClimbs}
+				renderItem={renderClimbItem}
+				keyExtractor={(item) => item.id.toString()}
+			/>
+		</View>
 	)
 }
 
@@ -96,21 +101,14 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		width: 100,
 	},
-	listItem: {
-		marginVertical: 5,
-		backgroundColor: "#000",
-		color: "#fff",
-	},
 	screen: {
 		backgroundColor: "#000",
 		flex: 1,
-		paddingVertical: 10,
 		paddingHorizontal: 20,
-		justifyContent: "flex-start",
+		paddingVertical: 10,
 	},
-	header: {
-		marginTop: 10,
-		marginLeft: 10,
+	listItem: {
+		bottomBorderColor: "#000",
 	},
 	headerSubtitle: {
 		color: "#fff",
