@@ -1,12 +1,4 @@
-import {
-	StyleSheet,
-	Text,
-	View,
-	PanResponder,
-	Alert,
-	Share,
-	Image,
-} from "react-native"
+import { StyleSheet, View, Image } from "react-native"
 import { Card, Icon } from "react-native-elements"
 
 const RenderLocation = ({ location }) => {
@@ -23,7 +15,7 @@ const RenderLocation = ({ location }) => {
 					source={location.image}
 				/>
 			</View>
-			<View style={styles.cardRow}>
+			{/* <View style={styles.cardRow}>
 				<Icon
 					name='heart-o'
 					type='font-awesome'
@@ -40,7 +32,7 @@ const RenderLocation = ({ location }) => {
 					reverse
 					onPress={() => console.log("pressed")}
 				/>
-			</View>
+			</View> */}
 		</Card>
 	) : (
 		<View />

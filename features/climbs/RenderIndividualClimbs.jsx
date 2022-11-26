@@ -1,15 +1,13 @@
-import {
-	StyleSheet,
-	Text,
-	View,
-	PanResponder,
-	Alert,
-	Share,
-	Image,
-} from "react-native"
+import { StyleSheet, View, Image } from "react-native"
 import { Card, Icon, Rating } from "react-native-elements"
 
-const RenderIndividualClimbs = ({ climb, isToDo, markToDo, isSend }) => {
+const RenderIndividualClimbs = ({
+	climb,
+	isToDo,
+	markToDo,
+	markSend,
+	isSend,
+}) => {
 	return climb ? (
 		<Card>
 			<Card.Title h2>
@@ -46,7 +44,7 @@ const RenderIndividualClimbs = ({ climb, isToDo, markToDo, isSend }) => {
 					color={isSend ? "#50C878" : "#808080"}
 					raised
 					reverse
-					onPress={() => console.log("pressed")}
+					onPress={() => markSend()}
 				/>
 			</View>
 		</Card>

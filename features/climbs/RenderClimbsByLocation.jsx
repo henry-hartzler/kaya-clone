@@ -40,7 +40,8 @@ const RenderClimbsByLocation = ({ locations }) => {
 
 const styles = StyleSheet.create({
 	listItem: {
-		marginVertical: 5,
+		marginVertical: 10,
+		marginHorizontal: 20,
 		backgroundColor: "#000",
 		color: "#fff",
 	},
