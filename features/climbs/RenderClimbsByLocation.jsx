@@ -34,6 +34,7 @@ const RenderClimbsByLocation = ({ locations }) => {
 			data={filteredClimbs}
 			renderItem={renderClimbItem}
 			keyExtractor={(item) => item.id.toString()}
+			style={{ marginTop: 10 }}
 		/>
 	)
 }

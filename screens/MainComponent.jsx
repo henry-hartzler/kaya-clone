@@ -49,10 +49,10 @@ const HomeTabs = () => {
 					title: "Locations",
 					tabBarIcon: ({ color }) => (
 						<Icon
-							name='map'
+							name='map-marker'
 							type='font-awesome'
-							size={24}
-							iconStyle={{ width: 24 }}
+							size={26}
+							iconStyle={{ width: 26 }}
 							color={color}
 						/>
 					),
