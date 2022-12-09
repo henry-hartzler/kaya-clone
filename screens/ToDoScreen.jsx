@@ -5,12 +5,13 @@ import {
 	FlatList,
 	TouchableOpacity,
 	Alert,
-} from "react-native"
-import { ListItem, Avatar, Icon } from "react-native-elements"
-import { useDispatch, useSelector } from "react-redux"
-import { toggleToDo } from "../features/ToDo/toDoSlice"
-import { toggleSends } from "../features/sends/sendsSlice"
-import { SwipeRow } from "react-native-swipe-list-view"
+	SafeAreaView,
+} from 'react-native'
+import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleToDo } from '../features/ToDo/toDoSlice'
+import { toggleSends } from '../features/sends/sendsSlice'
+import { SwipeRow } from 'react-native-swipe-list-view'
 
 const ToDoScreen = ({ navigation }) => {
 	const { climbsArray } = useSelector((state) => state.climbs)
@@ -42,11 +43,11 @@ const ToDoScreen = ({ navigation }) => {
 								`Did you send ${climb.name}?`,
 								[
 									{
-										text: "No",
-										style: "cancel",
+										text: 'No',
+										style: 'cancel',
 									},
 									{
-										text: "Yes",
+										text: 'Yes',
 										onPress: () => toggleSend(),
 									},
 								],
@@ -66,15 +67,15 @@ const ToDoScreen = ({ navigation }) => {
 						style={styles.deleteTouchable}
 						onPress={() =>
 							Alert.alert(
-								"Delete To Do?",
+								'Delete To Do?',
 								`Remove ${climb.name} from To Do List?`,
 								[
 									{
-										text: "Cancel",
-										style: "cancel",
+										text: 'Cancel',
+										style: 'cancel',
 									},
 									{
-										text: "OK",
+										text: 'OK',
 										onPress: () => dispatch(toggleToDo(climb.id)),
 									},
 								],
@@ -95,7 +96,7 @@ const ToDoScreen = ({ navigation }) => {
 					<ListItem
 						key={climb.id}
 						onPress={() => {
-							navigation.navigate("ClimbInfo", { climb })
+							navigation.navigate('ClimbInfo', { climb })
 						}}
 					>
 						<Avatar
@@ -114,7 +115,7 @@ const ToDoScreen = ({ navigation }) => {
 		)
 	}
 	return (
-		<View style={styles.screen}>
+		<SafeAreaView style={styles.screen}>
 			<View>
 				<Text style={styles.headerTitle}>To Do List</Text>
 			</View>
@@ -123,52 +124,52 @@ const ToDoScreen = ({ navigation }) => {
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>
-		</View>
+		</SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
 	swipeView: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 		flex: 1,
 	},
 	addTouchable: {
-		backgroundColor: "blue",
-		height: "100%",
+		backgroundColor: 'blue',
+		height: '100%',
 		width: 100,
-		justifyContent: "center",
+		justifyContent: 'center',
 	},
 	addText: {
-		color: "white",
-		fontWeight: "700",
-		textAlign: "center",
+		color: 'white',
+		fontWeight: '700',
+		textAlign: 'center',
 		width: 100,
 	},
 	deleteTouchable: {
-		backgroundColor: "red",
-		height: "100%",
+		backgroundColor: 'red',
+		height: '100%',
 		width: 100,
-		justifyContent: "center",
+		justifyContent: 'center',
 	},
 	deleteText: {
-		color: "white",
-		fontWeight: "700",
-		textAlign: "center",
+		color: 'white',
+		fontWeight: '700',
+		textAlign: 'center',
 		width: 100,
 	},
 	screen: {
-		backgroundColor: "#000",
+		backgroundColor: '#000',
 		flex: 1,
 		paddingHorizontal: 20,
 		paddingVertical: 10,
 	},
 	headerTitle: {
-		color: "#FFFF00",
+		color: '#FFFF00',
 		paddingVertical: 20,
 		fontSize: 32,
-		fontWeight: "bold",
+		fontWeight: 'bold',
 	},
 })
 export default ToDoScreen
