@@ -5,12 +5,13 @@ import {
 	FlatList,
 	TouchableOpacity,
 	Alert,
-} from "react-native"
-import { ListItem, Avatar, Icon } from "react-native-elements"
-import { useDispatch, useSelector } from "react-redux"
-import { toggleToDo } from "../features/ToDo/toDoSlice"
-import { toggleSends } from "../features/sends/sendsSlice"
-import { SwipeRow } from "react-native-swipe-list-view"
+	SafeAreaView,
+} from 'react-native'
+import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleToDo } from '../features/ToDo/toDoSlice'
+import { toggleSends } from '../features/sends/sendsSlice'
+import { SwipeRow } from 'react-native-swipe-list-view'
 
 const SendsScreen = ({ navigation }) => {
 	const { climbsArray } = useSelector((state) => state.climbs)
@@ -28,15 +29,15 @@ const SendsScreen = ({ navigation }) => {
 						style={styles.deleteTouchable}
 						onPress={() =>
 							Alert.alert(
-								"Delete Send?",
+								'Delete Send?',
 								`Remove ${climb.name} from Sends?`,
 								[
 									{
-										text: "Cancel",
-										style: "cancel",
+										text: 'Cancel',
+										style: 'cancel',
 									},
 									{
-										text: "OK",
+										text: 'OK',
 										onPress: () => dispatch(toggleSends(climb.id)),
 									},
 								],
@@ -57,7 +58,7 @@ const SendsScreen = ({ navigation }) => {
 					<ListItem
 						key={climb.id}
 						onPress={() => {
-							navigation.navigate("ClimbInfo", { climb })
+							navigation.navigate('ClimbInfo', { climb })
 						}}
 					>
 						<Avatar
@@ -76,7 +77,7 @@ const SendsScreen = ({ navigation }) => {
 		)
 	}
 	return (
-		<View style={styles.screen}>
+		<SafeAreaView style={styles.screen}>
 			<View>
 				<Text style={styles.headerTitle}>Sends</Text>
 			</View>
@@ -85,40 +86,40 @@ const SendsScreen = ({ navigation }) => {
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>
-		</View>
+		</SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
 	deleteView: {
-		flexDirection: "row",
-		justifyContent: "flex-end",
-		alignItems: "center",
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
 		flex: 1,
 	},
 	deleteTouchable: {
-		backgroundColor: "red",
-		height: "100%",
+		backgroundColor: 'red',
+		height: '100%',
 		width: 100,
-		justifyContent: "center",
+		justifyContent: 'center',
 	},
 	deleteText: {
-		color: "white",
-		fontWeight: "700",
-		textAlign: "center",
+		color: 'white',
+		fontWeight: '700',
+		textAlign: 'center',
 		width: 100,
 	},
 	screen: {
-		backgroundColor: "#000",
+		backgroundColor: '#000',
 		flex: 1,
 		paddingHorizontal: 20,
 		paddingVertical: 10,
 	},
 	headerTitle: {
-		color: "#FFFF00",
+		color: '#FFFF00',
 		paddingVertical: 20,
 		fontSize: 32,
-		fontWeight: "bold",
+		fontWeight: 'bold',
 	},
 })
 export default SendsScreen

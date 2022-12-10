@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, FlatList } from "react-native"
+import { Text, View, StyleSheet, FlatList, SafeAreaView } from "react-native"
 import { SearchBar, Avatar, ListItem } from "react-native-elements"
 import { useState } from "react"
 import { useSelector } from "react-redux"
@@ -73,7 +73,7 @@ const SearchScreen = ({ navigation }) => {
 	}
 
 	return (
-		<View style={styles.screen}>
+		<SafeAreaView style={styles.screen}>
 			<ScreenHeader />
 			<View style={styles.view}>
 				<SearchBar
@@ -111,7 +111,7 @@ const SearchScreen = ({ navigation }) => {
 					<Text style={styles.text}>No climbs yet</Text>
 				)}
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 
