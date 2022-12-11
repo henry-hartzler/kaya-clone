@@ -1,14 +1,14 @@
-import { StyleSheet, View, Text, Platform } from "react-native"
-import Constants from "expo-constants"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Icon } from "react-native-elements"
-import ToDoScreen from "./ToDoScreen"
-import LocationsScreen from "./LocationsScreen"
-import SendsScreen from "./SendsScreen"
-import SearchScreen from "./SearchScreen"
-import LocationInfoScreen from "./LocationInfoScreen"
-import ClimbInfoScreen from "./ClimbInfoScreen"
+import { StyleSheet, View, Text, Platform } from 'react-native'
+import Constants from 'expo-constants'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Icon } from 'react-native-elements'
+import ToDoScreen from './ToDoScreen'
+import LocationsScreen from './LocationsScreen'
+import SendsScreen from './SendsScreen'
+import SearchScreen from './SearchScreen'
+import LocationInfoScreen from './LocationInfoScreen'
+import ClimbInfoScreen from './ClimbInfoScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -16,11 +16,7 @@ const HomeTabs = () => {
 	return (
 		<Tab.Navigator
 			screenOptions={{
-				tabBarStyle: {
-					backgroundColor: "#000",
-					color: "#fff",
-				},
-				tabBarActiveTintColor: "#fff",
+				tabBarActiveTintColor: '#fff',
 				tabBarShowLabel: false,
 				headerShown: false,
 			}}
@@ -30,7 +26,7 @@ const HomeTabs = () => {
 				name='To Do'
 				component={ToDoScreen}
 				options={{
-					title: "To Do",
+					title: 'To Do',
 					tabBarIcon: ({ color }) => (
 						<Icon
 							name='list'
@@ -46,7 +42,7 @@ const HomeTabs = () => {
 				name='Locations'
 				component={LocationsScreen}
 				options={{
-					title: "Locations",
+					title: 'Locations',
 					tabBarIcon: ({ color }) => (
 						<Icon
 							name='map-marker'
@@ -62,7 +58,7 @@ const HomeTabs = () => {
 				name='Sends'
 				component={SendsScreen}
 				options={{
-					title: "Sends",
+					title: 'Sends',
 					tabBarIcon: ({ color }) => (
 						<Icon
 							name='check'
@@ -85,7 +81,7 @@ const Main = () => {
 		<View
 			style={{
 				flex: 1,
-				paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+				paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight,
 			}}
 		>
 			<Stack.Navigator
@@ -122,8 +118,8 @@ const Main = () => {
 
 const styles = StyleSheet.create({
 	mainFooter: {
-		backgroundColor: "black",
-		color: "#fff",
+		backgroundColor: 'black',
+		color: '#fff',
 		padding: 100,
 	},
 })

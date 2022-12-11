@@ -1,11 +1,12 @@
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from "react-native"
-import { SearchBar, Avatar, ListItem } from "react-native-elements"
-import { useState } from "react"
-import { useSelector } from "react-redux"
-import ScreenHeader from "../features/header/ScreenHeader"
+import { View, StyleSheet, FlatList, SafeAreaView } from 'react-native'
+import { Text, List } from 'react-native-paper'
+import { SearchBar, Avatar, ListItem } from 'react-native-elements'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import ScreenHeader from '../features/header/ScreenHeader'
 
 const SearchScreen = ({ navigation }) => {
-	const [search, setSearch] = useState("")
+	const [search, setSearch] = useState('')
 	const updateSearch = (search) => {
 		setSearch(search)
 		setFilteredLocations(
@@ -24,30 +25,27 @@ const SearchScreen = ({ navigation }) => {
 	const climbs = useSelector((state) => state.climbs.climbsArray)
 
 	const [filteredLocations, setFilteredLocations] = useState(
-		locations.filter((el) => el.name.includes(""))
+		locations.filter((el) => el.name.includes(''))
 	)
 	const [filteredClimbs, setFilteredClimbs] = useState(
-		climbs.filter((el) => el.name.includes(""))
+		climbs.filter((el) => el.name.includes(''))
 	)
 
 	const renderLocationItem = ({ item: location }) => {
 		return (
-			<ListItem
+			<List.Section
 				style={styles.listItem}
 				key={location.id}
 				onPress={() => {
-					navigation.navigate("LocationInfo", { location })
+					navigation.navigate('LocationInfo', { location })
 				}}
 			>
 				<Avatar
 					rounded
 					source={location.image}
 				/>
-				<ListItem.Content style={styles.listItemContent}>
-					<ListItem.Title>{location.name}</ListItem.Title>
-					<ListItem.Subtitle>{location.state}</ListItem.Subtitle>
-				</ListItem.Content>
-			</ListItem>
+				<List.Item title={location.name} />
+			</List.Section>
 		)
 	}
 
@@ -57,7 +55,7 @@ const SearchScreen = ({ navigation }) => {
 				style={styles.listItem}
 				key={climb.id}
 				onPress={() => {
-					navigation.navigate("ClimbInfo", { climb })
+					navigation.navigate('ClimbInfo', { climb })
 				}}
 			>
 				<Avatar
@@ -117,7 +115,7 @@ const SearchScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	screen: {
-		backgroundColor: "#000",
+		// backgroundColor: "#000",
 		flex: 1,
 	},
 	view: {
@@ -125,27 +123,27 @@ const styles = StyleSheet.create({
 		marginHorizontal: 20,
 	},
 	text: {
-		color: "#fff",
+		// color: "#fff",
 	},
 	header: {
 		marginTop: 10,
 		marginLeft: 10,
 	},
 	headerSubtitle: {
-		color: "#fff",
+		// color: "#fff",
 		paddingBottom: 5,
 		fontSize: 22,
 	},
 	headerTitle: {
-		color: "#FFFF00",
+		color: '#FFFF00',
 		paddingRight: 50,
 		fontSize: 32,
-		fontWeight: "bold",
+		fontWeight: 'bold',
 	},
 	listItem: {
 		marginVertical: 5,
-		backgroundColor: "#000",
-		color: "#fff",
+		backgroundColor: '#000',
+		// color: "#fff",
 	},
 })
 

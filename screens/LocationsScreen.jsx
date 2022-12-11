@@ -1,6 +1,7 @@
-import { StyleSheet, SafeAreaView, View, Text, FlatList } from "react-native"
-import { Avatar, ListItem, Button, Icon } from "react-native-elements"
-import { useSelector } from "react-redux"
+import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
+import { Text } from 'react-native-paper'
+import { Avatar, ListItem, Button, Icon } from 'react-native-elements'
+import { useSelector } from 'react-redux'
 
 const LocationsScreen = ({ navigation }) => {
 	const locations = useSelector((state) => state.locations)
@@ -11,7 +12,7 @@ const LocationsScreen = ({ navigation }) => {
 				style={styles.listItem}
 				key={location.id}
 				onPress={() => {
-					navigation.navigate("LocationInfo", { location })
+					navigation.navigate('LocationInfo', { location })
 				}}
 			>
 				<Avatar
@@ -35,7 +36,7 @@ const LocationsScreen = ({ navigation }) => {
 			<View style={{ padding: 10 }}>
 				<Button
 					title='Search by climbs and locations'
-					buttonStyle={{ backgroundColor: "#424449" }}
+					buttonStyle={{ backgroundColor: '#424449' }}
 					icon={
 						<Icon
 							name='search'
@@ -47,7 +48,7 @@ const LocationsScreen = ({ navigation }) => {
 					}
 					iconPosition='left'
 					raised
-					onPress={() => navigation.navigate("Search")}
+					onPress={() => navigation.navigate('Search')}
 				/>
 			</View>
 			<FlatList
@@ -61,31 +62,31 @@ const LocationsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	screen: {
-		backgroundColor: "#000",
+		// backgroundColor: "#000",
 		flex: 1,
 		paddingVertical: 10,
 		paddingHorizontal: 20,
-		justifyContent: "flex-start",
+		justifyContent: 'flex-start',
 	},
 	header: {
 		marginTop: 10,
 		marginLeft: 10,
 	},
 	headerSubtitle: {
-		color: "#fff",
+		// color: "#fff",
 		paddingBottom: 5,
 		fontSize: 22,
 	},
 	headerTitle: {
-		color: "#FFFF00",
+		// color: "#FFFF00",
 		paddingRight: 50,
 		fontSize: 32,
-		fontWeight: "bold",
+		fontWeight: 'bold',
 	},
 	listItem: {
 		marginVertical: 5,
-		backgroundColor: "#000",
-		color: "#fff",
+		// backgroundColor: "#000",
+		// color: "#fff",
 	},
 	listItemContent: {},
 })
