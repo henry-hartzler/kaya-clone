@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
 		width: 100,
 	},
 	screen: {
-		backgroundColor: '#000',
 		flex: 1,
 		paddingHorizontal: 20,
 		paddingVertical: 10,

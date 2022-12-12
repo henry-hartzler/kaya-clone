@@ -1,10 +1,16 @@
-import { StyleSheet, View, Image } from "react-native"
-import { Card, Icon } from "react-native-elements"
+import { StyleSheet, View, Image } from 'react-native'
+import { Card } from 'react-native-elements'
+import { useTheme } from '@react-navigation/native'
 
 const RenderLocation = ({ location }) => {
+	const { colors } = useTheme()
+
 	return location ? (
-		<Card style={{ flex: 1 }}>
-			<Card.Title h2>
+		<Card containerStyle={{ backgroundColor: colors.card }}>
+			<Card.Title
+				h2
+				style={{ color: colors.text }}
+			>
 				{location.name}, {location.state}
 			</Card.Title>
 			<Card.Divider />
@@ -41,20 +47,21 @@ const RenderLocation = ({ location }) => {
 
 const styles = StyleSheet.create({
 	cardRow: {
-		alignItems: "center",
-		justifyContent: "center",
+		alignItems: 'center',
+		justifyContent: 'center',
 		flex: 1,
-		flexDirection: "row",
+		flexDirection: 'row',
 		margin: 20,
 		marginBottom: 30,
 	},
 	cardImageView: {
-		position: "relative",
-		alignItems: "center",
+		position: 'relative',
+		alignItems: 'center',
+		marginTop: 10,
 		marginBottom: 20,
 	},
 	cardImage: {
-		width: "100%",
+		width: '100%',
 		height: 175,
 	},
 })
