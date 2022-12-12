@@ -36,6 +36,8 @@ const ToDoScreen = ({ navigation }) => {
 			<SwipeRow
 				rightOpenValue={-100}
 				leftOpenValue={100}
+				stopLeftSwipe={100}
+				stopRightSwipe={-100}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.swipeView}>
@@ -108,8 +110,12 @@ const ToDoScreen = ({ navigation }) => {
 						}}
 					>
 						<Avatar
-							rounded
-							source={climb.image}
+							icon={{ name: 'landscape', type: 'material' }}
+							size={'medium'}
+							containerStyle={{
+								backgroundColor: colors.card,
+								color: colors.text,
+							}}
 						/>
 						<ListItem.Content>
 							<ListItem.Title style={{ color: colors.text }}>
@@ -143,6 +149,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
+
 		flex: 1,
 	},
 	addTouchable: {
