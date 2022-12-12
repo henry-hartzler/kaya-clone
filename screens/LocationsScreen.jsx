@@ -1,26 +1,36 @@
-import { StyleSheet, SafeAreaView, View, Text, FlatList } from "react-native"
-import { Avatar, ListItem, Button, Icon } from "react-native-elements"
-import { useSelector } from "react-redux"
+import { StyleSheet, SafeAreaView, View, Text, FlatList } from 'react-native'
+import { Avatar, ListItem, Button, Icon } from 'react-native-elements'
+import { useTheme } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 const LocationsScreen = ({ navigation }) => {
+	const { colors } = useTheme()
 	const locations = useSelector((state) => state.locations)
 
 	const renderLocationItem = ({ item: location }) => {
 		return (
 			<ListItem
-				style={styles.listItem}
+				containerStyle={{
+					backgroundColor: colors.card,
+					color: colors.text,
+					marginVertical: 5,
+				}}
 				key={location.id}
 				onPress={() => {
-					navigation.navigate("LocationInfo", { location })
+					navigation.navigate('LocationInfo', { location })
 				}}
 			>
 				<Avatar
 					rounded
 					source={location.image}
 				/>
-				<ListItem.Content style={styles.listItemContent}>
-					<ListItem.Title>{location.name}</ListItem.Title>
-					<ListItem.Subtitle>{location.state}</ListItem.Subtitle>
+				<ListItem.Content>
+					<ListItem.Title style={{ color: colors.text }}>
+						{location.name}
+					</ListItem.Title>
+					<ListItem.Subtitle style={{ color: colors.text }}>
+						{location.state}
+					</ListItem.Subtitle>
 				</ListItem.Content>
 			</ListItem>
 		)
@@ -35,7 +45,7 @@ const LocationsScreen = ({ navigation }) => {
 			<View style={{ padding: 10 }}>
 				<Button
 					title='Search by climbs and locations'
-					buttonStyle={{ backgroundColor: "#424449" }}
+					buttonStyle={{ backgroundColor: '#424449' }}
 					icon={
 						<Icon
 							name='search'
@@ -47,7 +57,7 @@ const LocationsScreen = ({ navigation }) => {
 					}
 					iconPosition='left'
 					raised
-					onPress={() => navigation.navigate("Search")}
+					onPress={() => navigation.navigate('Search')}
 				/>
 			</View>
 			<FlatList
@@ -61,33 +71,26 @@ const LocationsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	screen: {
-		backgroundColor: "#000",
 		flex: 1,
 		paddingVertical: 10,
 		paddingHorizontal: 20,
-		justifyContent: "flex-start",
+		justifyContent: 'flex-start',
 	},
 	header: {
 		marginTop: 10,
 		marginLeft: 10,
 	},
 	headerSubtitle: {
-		color: "#fff",
+		color: '#fff',
 		paddingBottom: 5,
 		fontSize: 22,
 	},
 	headerTitle: {
-		color: "#FFFF00",
+		color: '#FFFF00',
 		paddingRight: 50,
 		fontSize: 32,
-		fontWeight: "bold",
+		fontWeight: 'bold',
 	},
-	listItem: {
-		marginVertical: 5,
-		backgroundColor: "#000",
-		color: "#fff",
-	},
-	listItemContent: {},
 })
 
 export default LocationsScreen

@@ -1,11 +1,14 @@
-import { Text, View, StyleSheet, FlatList, SafeAreaView } from "react-native"
-import { SearchBar, Avatar, ListItem } from "react-native-elements"
-import { useState } from "react"
-import { useSelector } from "react-redux"
-import ScreenHeader from "../features/header/ScreenHeader"
+import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native'
+import { SearchBar, Avatar, ListItem } from 'react-native-elements'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import ScreenHeader from '../features/header/ScreenHeader'
+import { useTheme } from '@react-navigation/native'
 
 const SearchScreen = ({ navigation }) => {
-	const [search, setSearch] = useState("")
+	const { colors } = useTheme()
+
+	const [search, setSearch] = useState('')
 	const updateSearch = (search) => {
 		setSearch(search)
 		setFilteredLocations(
@@ -24,28 +27,36 @@ const SearchScreen = ({ navigation }) => {
 	const climbs = useSelector((state) => state.climbs.climbsArray)
 
 	const [filteredLocations, setFilteredLocations] = useState(
-		locations.filter((el) => el.name.includes(""))
+		locations.filter((el) => el.name.includes(''))
 	)
 	const [filteredClimbs, setFilteredClimbs] = useState(
-		climbs.filter((el) => el.name.includes(""))
+		climbs.filter((el) => el.name.includes(''))
 	)
 
 	const renderLocationItem = ({ item: location }) => {
 		return (
 			<ListItem
-				style={styles.listItem}
+				containerStyle={{
+					backgroundColor: colors.card,
+					color: colors.text,
+					marginVertical: 5,
+				}}
 				key={location.id}
 				onPress={() => {
-					navigation.navigate("LocationInfo", { location })
+					navigation.navigate('LocationInfo', { location })
 				}}
 			>
 				<Avatar
 					rounded
 					source={location.image}
 				/>
-				<ListItem.Content style={styles.listItemContent}>
-					<ListItem.Title>{location.name}</ListItem.Title>
-					<ListItem.Subtitle>{location.state}</ListItem.Subtitle>
+				<ListItem.Content>
+					<ListItem.Title style={{ color: colors.text }}>
+						{location.name}
+					</ListItem.Title>
+					<ListItem.Subtitle style={{ color: colors.text }}>
+						{location.state}
+					</ListItem.Subtitle>
 				</ListItem.Content>
 			</ListItem>
 		)
@@ -54,19 +65,27 @@ const SearchScreen = ({ navigation }) => {
 	const renderClimbItem = ({ item: climb }) => {
 		return (
 			<ListItem
-				style={styles.listItem}
+				containerStyle={{
+					backgroundColor: colors.card,
+					color: colors.text,
+					marginVertical: 5,
+				}}
 				key={climb.id}
 				onPress={() => {
-					navigation.navigate("ClimbInfo", { climb })
+					navigation.navigate('ClimbInfo', { climb })
 				}}
 			>
 				<Avatar
 					rounded
 					source={climb.image}
 				/>
-				<ListItem.Content style={styles.listItemContent}>
-					<ListItem.Title>{climb.name}</ListItem.Title>
-					<ListItem.Subtitle>{climb.grade}</ListItem.Subtitle>
+				<ListItem.Content>
+					<ListItem.Title style={{ color: colors.text }}>
+						{climb.name}
+					</ListItem.Title>
+					<ListItem.Subtitle style={{ color: colors.text }}>
+						{climb.grade}
+					</ListItem.Subtitle>
 				</ListItem.Content>
 			</ListItem>
 		)
@@ -86,7 +105,7 @@ const SearchScreen = ({ navigation }) => {
 			<View style={styles.view}>
 				{search && filteredLocations.length !== 0 ? (
 					<>
-						<Text style={styles.text}>Locations</Text>
+						<Text style={{ color: colors.text }}>Locations</Text>
 						<FlatList
 							data={filteredLocations}
 							renderItem={renderLocationItem}
@@ -94,13 +113,13 @@ const SearchScreen = ({ navigation }) => {
 						/>
 					</>
 				) : (
-					<Text style={styles.text}>No locations yet</Text>
+					<Text style={{ color: colors.text }}>No locations yet</Text>
 				)}
 			</View>
 			<View style={styles.view}>
 				{search && filteredClimbs.length !== 0 ? (
 					<>
-						<Text style={styles.text}>Climbs</Text>
+						<Text style={{ color: colors.text }}>Climbs</Text>
 						<FlatList
 							data={filteredClimbs}
 							renderItem={renderClimbItem}
@@ -108,7 +127,7 @@ const SearchScreen = ({ navigation }) => {
 						/>
 					</>
 				) : (
-					<Text style={styles.text}>No climbs yet</Text>
+					<Text style={{ color: colors.text }}>No climbs yet</Text>
 				)}
 			</View>
 		</SafeAreaView>
@@ -117,35 +136,27 @@ const SearchScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	screen: {
-		backgroundColor: "#000",
+		backgroundColor: '#000',
 		flex: 1,
 	},
 	view: {
 		marginTop: 15,
 		marginHorizontal: 20,
 	},
-	text: {
-		color: "#fff",
-	},
 	header: {
 		marginTop: 10,
 		marginLeft: 10,
 	},
 	headerSubtitle: {
-		color: "#fff",
+		color: '#fff',
 		paddingBottom: 5,
 		fontSize: 22,
 	},
 	headerTitle: {
-		color: "#FFFF00",
+		color: '#FFFF00',
 		paddingRight: 50,
 		fontSize: 32,
-		fontWeight: "bold",
-	},
-	listItem: {
-		marginVertical: 5,
-		backgroundColor: "#000",
-		color: "#fff",
+		fontWeight: 'bold',
 	},
 })
 

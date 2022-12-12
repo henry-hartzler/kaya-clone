@@ -1,9 +1,12 @@
-import { Avatar, ListItem } from "react-native-elements"
-import { FlatList, StyleSheet } from "react-native"
-import { useSelector } from "react-redux"
-import { useNavigation } from "@react-navigation/native"
+import { Avatar, ListItem } from 'react-native-elements'
+import { FlatList, StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+import { useTheme } from '@react-navigation/native'
 
 const RenderClimbsByLocation = ({ locations }) => {
+	const { colors } = useTheme()
+
 	const climbs = useSelector((state) => state.climbs.climbsArray)
 	const navigation = useNavigation()
 
@@ -12,19 +15,28 @@ const RenderClimbsByLocation = ({ locations }) => {
 	const renderClimbItem = ({ item: climb }) => {
 		return (
 			<ListItem
-				style={styles.listItem}
+				containerStyle={{
+					backgroundColor: colors.card,
+					color: colors.text,
+					marginVertical: 5,
+					marginHorizontal: 20,
+				}}
 				key={climb.id}
 				onPress={() => {
-					navigation.navigate("ClimbInfo", { climb })
+					navigation.navigate('ClimbInfo', { climb })
 				}}
 			>
 				<Avatar
 					rounded
 					source={climb.image}
 				/>
-				<ListItem.Content style={styles.listItemContent}>
-					<ListItem.Title>{climb.name}</ListItem.Title>
-					<ListItem.Subtitle>{climb.grade}</ListItem.Subtitle>
+				<ListItem.Content>
+					<ListItem.Title style={{ color: colors.text }}>
+						{climb.name}
+					</ListItem.Title>
+					<ListItem.Subtitle style={{ color: colors.text }}>
+						{climb.grade}
+					</ListItem.Subtitle>
 				</ListItem.Content>
 			</ListItem>
 		)
@@ -41,12 +53,9 @@ const RenderClimbsByLocation = ({ locations }) => {
 
 const styles = StyleSheet.create({
 	listItem: {
-		marginVertical: 10,
-		marginHorizontal: 20,
-		backgroundColor: "#000",
-		color: "#fff",
+		backgroundColor: '#000',
+		color: '#fff',
 	},
-	listItemContent: {},
 })
 
 export default RenderClimbsByLocation
