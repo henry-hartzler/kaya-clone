@@ -36,7 +36,8 @@ const ToDoScreen = ({ navigation }) => {
 			<SwipeRow
 				rightOpenValue={-100}
 				leftOpenValue={100}
-				style={{ marginVertical: 5 }}
+				stopLeftSwipe={100}
+				stopRightSwipe={-100}
 			>
 				<View style={styles.swipeView}>
 					<TouchableOpacity
@@ -106,6 +107,7 @@ const ToDoScreen = ({ navigation }) => {
 						onPress={() => {
 							navigation.navigate('ClimbInfo', { climb })
 						}}
+						topDivider
 					>
 						<Avatar
 							rounded
