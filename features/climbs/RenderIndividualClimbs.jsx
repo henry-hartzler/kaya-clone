@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, Alert } from 'react-native'
 import { Card, Icon, Rating } from 'react-native-elements'
 import { useTheme } from '@react-navigation/native'
 
@@ -47,7 +47,25 @@ const RenderIndividualClimbs = ({
 					color={isToDo ? '#3388FF' : '#808080'}
 					raised
 					reverse
-					onPress={() => markToDo()}
+					onPress={() =>
+						isSend
+							? Alert.alert(
+									'Delete From Sends?',
+									`Adding ${climb.name} to your \n"To Do List" will remove it from your Sends.\n\nAre you sure?`,
+									[
+										{
+											text: 'Cancel',
+											style: 'cancel',
+										},
+										{
+											text: 'OK',
+											onPress: () => markToDo(),
+										},
+									],
+									{ cancelable: false }
+							  )
+							: markToDo()
+					}
 				/>
 				<Icon
 					name='check'

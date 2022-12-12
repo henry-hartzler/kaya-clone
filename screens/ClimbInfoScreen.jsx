@@ -10,12 +10,21 @@ const ClimbInfoScreen = ({ route }) => {
 	const toDos = useSelector((state) => state.toDos)
 	const sends = useSelector((state) => state.sends)
 	const toDoClimbs = toDos.includes(climb.id)
+	const sendsClimbs = sends.includes(climb.id)
 	const toggleSend = () => {
 		if (toDoClimbs) {
 			dispatch(toggleToDo(climb.id))
 			dispatch(toggleSends(climb.id))
 		} else {
 			dispatch(toggleSends(climb.id))
+		}
+	}
+	const toggleToDos = () => {
+		if (sendsClimbs) {
+			dispatch(toggleToDo(climb.id))
+			dispatch(toggleSends(climb.id))
+		} else {
+			dispatch(toggleToDo(climb.id))
 		}
 	}
 	const dispatch = useDispatch()
@@ -27,7 +36,7 @@ const ClimbInfoScreen = ({ route }) => {
 				climb={climb}
 				isToDo={toDos.includes(climb.id)}
 				isSend={sends.includes(climb.id)}
-				markToDo={() => dispatch(toggleToDo(climb.id))}
+				markToDo={() => toggleToDos()}
 				markSend={() => toggleSend()}
 			/>
 		</SafeAreaView>
