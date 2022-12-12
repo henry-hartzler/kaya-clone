@@ -7,7 +7,7 @@ const LocationInfoScreen = ({ route }) => {
 	const { location } = route.params
 
 	return (
-		<SafeAreaView style={{ backgroundColor: '#000', flex: 1 }}>
+		<SafeAreaView style={{ flex: 1 }}>
 			<ScreenHeader />
 			<RenderLocation location={location} />
 			<RenderClimbsByLocation locations={location} />

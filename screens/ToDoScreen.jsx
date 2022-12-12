@@ -12,8 +12,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleToDo } from '../features/ToDo/toDoSlice'
 import { toggleSends } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
+import { useTheme } from '@react-navigation/native'
 
 const ToDoScreen = ({ navigation }) => {
+	const { colors } = useTheme()
+
 	const { climbsArray } = useSelector((state) => state.climbs)
 	const toDos = useSelector((state) => state.toDos)
 	const dispatch = useDispatch()
@@ -33,6 +36,7 @@ const ToDoScreen = ({ navigation }) => {
 			<SwipeRow
 				rightOpenValue={-100}
 				leftOpenValue={100}
+				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.swipeView}>
 					<TouchableOpacity
@@ -94,6 +98,10 @@ const ToDoScreen = ({ navigation }) => {
 				</View>
 				<View>
 					<ListItem
+						containerStyle={{
+							backgroundColor: colors.card,
+							color: colors.text,
+						}}
 						key={climb.id}
 						onPress={() => {
 							navigation.navigate('ClimbInfo', { climb })
@@ -103,11 +111,13 @@ const ToDoScreen = ({ navigation }) => {
 							rounded
 							source={climb.image}
 						/>
-						<ListItem.Content style={styles.listItemContent}>
-							<ListItem.Title>
+						<ListItem.Content>
+							<ListItem.Title style={{ color: colors.text }}>
 								{climb.name}, {climb.grade}
 							</ListItem.Title>
-							<ListItem.Subtitle>{climb.location}</ListItem.Subtitle>
+							<ListItem.Subtitle style={{ color: colors.text }}>
+								{climb.location}
+							</ListItem.Subtitle>
 						</ListItem.Content>
 					</ListItem>
 				</View>
@@ -160,7 +170,6 @@ const styles = StyleSheet.create({
 		width: 100,
 	},
 	screen: {
-		backgroundColor: '#000',
 		flex: 1,
 		paddingHorizontal: 20,
 		paddingVertical: 10,
