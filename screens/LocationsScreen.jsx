@@ -10,7 +10,11 @@ const LocationsScreen = ({ navigation }) => {
 	const renderLocationItem = ({ item: location }) => {
 		return (
 			<ListItem
-				containerStyle={{ backgroundColor: colors.card, color: colors.text }}
+				containerStyle={{
+					backgroundColor: colors.card,
+					color: colors.text,
+					marginVertical: 5,
+				}}
 				key={location.id}
 				onPress={() => {
 					navigation.navigate('LocationInfo', { location })
