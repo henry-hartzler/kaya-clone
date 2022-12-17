@@ -34,41 +34,13 @@ const ToDoScreen = ({ navigation }) => {
 		}
 		return (
 			<SwipeRow
-				rightOpenValue={-100}
-				leftOpenValue={100}
-				stopLeftSwipe={100}
-				stopRightSwipe={-100}
+				rightOpenValue={-80}
+				disableRightSwipe
+				rightActivationValue={-200}
+				onRightAction={() => dispatch(toggleToDo(climb.id))}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.swipeView}>
-					<TouchableOpacity
-						style={styles.addTouchable}
-						onPress={() =>
-							Alert.alert(
-								`Congrats on your send! 👊`,
-								`Did you send ${climb.name}?`,
-								[
-									{
-										text: 'No',
-										style: 'cancel',
-									},
-									{
-										text: 'Yes',
-										onPress: () => toggleSend(),
-									},
-								],
-								{ cancelable: false }
-							)
-						}
-					>
-						<Icon
-							name='check'
-							type='font-awesome'
-							size={25}
-							iconStyle={styles.deleteText}
-							color='#fff'
-						/>
-					</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.deleteTouchable}
 						onPress={() =>
@@ -125,6 +97,7 @@ const ToDoScreen = ({ navigation }) => {
 								{climb.location}
 							</ListItem.Subtitle>
 						</ListItem.Content>
+						<ListItem.Chevron />
 					</ListItem>
 				</View>
 			</SwipeRow>
@@ -147,34 +120,21 @@ const ToDoScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	swipeView: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'flex-end',
 		alignItems: 'center',
-
 		flex: 1,
-	},
-	addTouchable: {
-		backgroundColor: 'blue',
-		height: '100%',
-		width: 100,
-		justifyContent: 'center',
-	},
-	addText: {
-		color: 'white',
-		fontWeight: '700',
-		textAlign: 'center',
-		width: 100,
 	},
 	deleteTouchable: {
 		backgroundColor: 'red',
 		height: '100%',
-		width: 100,
+		width: '90%',
 		justifyContent: 'center',
 	},
 	deleteText: {
 		color: 'white',
 		fontWeight: '700',
-		textAlign: 'center',
-		width: 100,
+		textAlign: 'right',
+		width: '80%',
 	},
 	screen: {
 		flex: 1,
