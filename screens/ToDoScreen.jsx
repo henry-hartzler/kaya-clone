@@ -7,10 +7,9 @@ import {
 	Alert,
 	SafeAreaView,
 } from 'react-native'
-import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleToDo } from '../features/ToDo/toDoSlice'
-import { toggleSends } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
@@ -23,15 +22,16 @@ const ToDoScreen = ({ navigation }) => {
 	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs.id))
 
 	const renderClimbItem = ({ item: climb }) => {
-		const inToDoClimbs = toDos.includes(climb.id)
-		const toggleSend = () => {
-			if (inToDoClimbs) {
-				dispatch(toggleToDo(climb.id))
-				dispatch(toggleSends(climb.id))
-			} else {
-				dispatch(toggleSends(climb.id))
-			}
-		}
+		//these may be helpful in ClimbInfoScreen for the Speeddial
+		// const inToDoClimbs = toDos.includes(climb.id)
+		// const toggleSend = () => {
+		// 	if (inToDoClimbs) {
+		// 		dispatch(toggleToDo(climb.id))
+		// 		dispatch(toggleSends(climb.id))
+		// 	} else {
+		// 		dispatch(toggleSends(climb.id))
+		// 	}
+		// }
 		return (
 			<SwipeRow
 				rightOpenValue={-80}
@@ -112,6 +112,13 @@ const ToDoScreen = ({ navigation }) => {
 				data={toDoClimbs}
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
+			/>
+			<FAB
+				placement='right'
+				color='#FFFF00'
+				style={{ marginRight: 20, marginBottom: 20 }}
+				icon={{ name: 'add', color: '#000' }}
+				onPress={() => navigation.navigate('Search')}
 			/>
 		</SafeAreaView>
 	)
