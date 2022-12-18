@@ -17,6 +17,7 @@ const ToDoScreen = ({ navigation }) => {
 	const { colors } = useTheme()
 
 	const { climbsArray } = useSelector((state) => state.climbs)
+
 	const toDos = useSelector((state) => state.toDos)
 	const dispatch = useDispatch()
 	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs.id))
@@ -40,7 +41,7 @@ const ToDoScreen = ({ navigation }) => {
 				onRightAction={() => dispatch(toggleToDo(climb.id))}
 				style={{ marginVertical: 5 }}
 			>
-				<View style={styles.swipeView}>
+				<View style={styles.deleteView}>
 					<TouchableOpacity
 						style={styles.deleteTouchable}
 						onPress={() =>
@@ -125,7 +126,7 @@ const ToDoScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-	swipeView: {
+	deleteView: {
 		flexDirection: 'row',
 		justifyContent: 'flex-end',
 		alignItems: 'center',

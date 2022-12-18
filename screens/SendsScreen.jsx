@@ -7,7 +7,7 @@ import {
 	Alert,
 	SafeAreaView,
 } from 'react-native'
-import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleSends } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
@@ -26,7 +26,10 @@ const SendsScreen = ({ navigation }) => {
 	const renderClimbItem = ({ item: climb }) => {
 		return (
 			<SwipeRow
-				rightOpenValue={-100}
+				rightOpenValue={-80}
+				disableRightSwipe
+				rightActivationValue={-200}
+				onRightAction={() => dispatch(toggleSends(climb.id))}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
@@ -71,8 +74,12 @@ const SendsScreen = ({ navigation }) => {
 						}}
 					>
 						<Avatar
-							rounded
-							source={climb.image}
+							icon={{ name: 'landscape', type: 'material' }}
+							size={'medium'}
+							containerStyle={{
+								backgroundColor: colors.card,
+								color: colors.text,
+							}}
 						/>
 						<ListItem.Content>
 							<ListItem.Title style={{ color: colors.text }}>
@@ -82,6 +89,7 @@ const SendsScreen = ({ navigation }) => {
 								{climb.location}
 							</ListItem.Subtitle>
 						</ListItem.Content>
+						<ListItem.Chevron />
 					</ListItem>
 				</View>
 			</SwipeRow>
@@ -97,6 +105,13 @@ const SendsScreen = ({ navigation }) => {
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>
+			<FAB
+				placement='right'
+				color='#FFFF00'
+				style={{ marginRight: 20, marginBottom: 20 }}
+				icon={{ name: 'add', color: '#000' }}
+				onPress={() => navigation.navigate('Search')}
+			/>
 		</SafeAreaView>
 	)
 }
@@ -111,14 +126,14 @@ const styles = StyleSheet.create({
 	deleteTouchable: {
 		backgroundColor: 'red',
 		height: '100%',
-		width: 100,
+		width: '90%',
 		justifyContent: 'center',
 	},
 	deleteText: {
 		color: 'white',
 		fontWeight: '700',
-		textAlign: 'center',
-		width: 100,
+		textAlign: 'right',
+		width: '80%',
 	},
 	screen: {
 		flex: 1,
