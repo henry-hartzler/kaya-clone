@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native'
-import { SearchBar, Avatar, ListItem } from 'react-native-elements'
+import { SearchBar, Avatar, ListItem, Icon } from 'react-native-elements'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import ScreenHeader from '../features/header/ScreenHeader'
@@ -103,7 +103,8 @@ const SearchScreen = ({ navigation }) => {
 			</View>
 
 			<View style={styles.view}>
-				{search && filteredLocations.length !== 0 ? (
+				{(search && filteredLocations.length !== 0) ||
+				(search && filteredClimbs.length !== 0) ? (
 					<>
 						<Text style={{ color: colors.text }}>Locations</Text>
 						<FlatList
@@ -111,14 +112,6 @@ const SearchScreen = ({ navigation }) => {
 							renderItem={renderLocationItem}
 							keyExtractor={(item) => item.id.toString()}
 						/>
-					</>
-				) : (
-					<Text style={{ color: colors.text }}>No locations yet</Text>
-				)}
-			</View>
-			<View style={styles.view}>
-				{search && filteredClimbs.length !== 0 ? (
-					<>
 						<Text style={{ color: colors.text }}>Climbs</Text>
 						<FlatList
 							data={filteredClimbs}
@@ -127,7 +120,14 @@ const SearchScreen = ({ navigation }) => {
 						/>
 					</>
 				) : (
-					<Text style={{ color: colors.text }}>No climbs yet</Text>
+					<View style={{ marginVertical: 100 }}>
+						<Icon
+							name='search'
+							type='font-awesome'
+							color={colors.text}
+							size={75}
+						/>
+					</View>
 				)}
 			</View>
 		</SafeAreaView>
