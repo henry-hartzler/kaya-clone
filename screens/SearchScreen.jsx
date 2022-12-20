@@ -47,8 +47,12 @@ const SearchScreen = ({ navigation }) => {
 				}}
 			>
 				<Avatar
-					rounded
-					source={location.image}
+					icon={{ name: 'place', type: 'material' }}
+					size={'medium'}
+					containerStyle={{
+						backgroundColor: colors.card,
+						color: colors.text,
+					}}
 				/>
 				<ListItem.Content>
 					<ListItem.Title style={{ color: colors.text }}>
@@ -58,6 +62,7 @@ const SearchScreen = ({ navigation }) => {
 						{location.state}
 					</ListItem.Subtitle>
 				</ListItem.Content>
+				<ListItem.Chevron />
 			</ListItem>
 		)
 	}
@@ -76,17 +81,22 @@ const SearchScreen = ({ navigation }) => {
 				}}
 			>
 				<Avatar
-					rounded
-					source={climb.image}
+					icon={{ name: 'landscape', type: 'material' }}
+					size={'medium'}
+					containerStyle={{
+						backgroundColor: colors.card,
+						color: colors.text,
+					}}
 				/>
 				<ListItem.Content>
 					<ListItem.Title style={{ color: colors.text }}>
-						{climb.name}
+						{climb.name}, {climb.grade}
 					</ListItem.Title>
 					<ListItem.Subtitle style={{ color: colors.text }}>
-						{climb.grade}
+						{climb.location}
 					</ListItem.Subtitle>
 				</ListItem.Content>
+				<ListItem.Chevron />
 			</ListItem>
 		)
 	}
