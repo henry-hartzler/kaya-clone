@@ -1,6 +1,14 @@
-import { StyleSheet, View, Image, Alert, ToastAndroid } from 'react-native'
-import { Card, Icon, Rating } from 'react-native-elements'
+import {
+	StyleSheet,
+	View,
+	Image,
+	Alert,
+	ToastAndroid,
+	SafeAreaView,
+} from 'react-native'
+import { Card, Icon, Rating, SpeedDial, Chip } from 'react-native-elements'
 import { useTheme } from '@react-navigation/native'
+import { useState } from 'react'
 
 const RenderIndividualClimbs = ({
 	climb,
@@ -9,44 +17,21 @@ const RenderIndividualClimbs = ({
 	markSend,
 	isSend,
 }) => {
-	const { colors } = useTheme()
-	return climb ? (
-		<Card containerStyle={{ backgroundColor: colors.card }}>
-			<Card.Title
-				style={{ color: colors.text }}
-				h2
+	const SpeedDialIcon = () => {
+		const [open, setOpen] = useState(false)
+		return (
+			<SpeedDial
+				isOpen={open}
+				icon={{ name: 'add', color: '#000' }}
+				openIcon={{ name: 'close', color: '#fff' }}
+				onOpen={() => setOpen(!open)}
+				onClose={() => setOpen(!open)}
+				color={open === false ? '#FFFF00' : '#808080'}
+				style={{ marginRight: 20, marginBottom: 20 }}
 			>
-				{climb.name}, {climb.grade}
-			</Card.Title>
-			<Card.Divider />
-			<View style={styles.cardImageView}>
-				<Image
-					style={styles.cardImage}
-					resizeMode='contain'
-					source={climb.image}
-				/>
-			</View>
-			<Card.Title
-				style={{ color: colors.text }}
-				h4
-			>
-				{climb.location}
-			</Card.Title>
-			<View style={{ marginBottom: 20 }}>
-				<Rating
-					startingValue={climb.rating}
-					readonly
-					style={{ alignItems: 'center' }}
-					tintColor={colors.card}
-				/>
-			</View>
-			<View style={styles.cardRow}>
-				<Icon
-					name='list'
-					type='font-awesome'
-					color={isToDo ? '#3388FF' : '#808080'}
-					raised
-					reverse
+				<SpeedDial.Action
+					icon={{ name: 'list', color: '#fff' }}
+					title='To Do'
 					onPress={() => {
 						if (isSend) {
 							Alert.alert(
@@ -90,13 +75,11 @@ const RenderIndividualClimbs = ({
 									  )
 						}
 					}}
+					color='#3388FF'
 				/>
-				<Icon
-					name='check'
-					type='font-awesome'
-					color={isSend ? '#50C878' : '#808080'}
-					raised
-					reverse
+				<SpeedDial.Action
+					icon={{ name: 'check', color: '#fff' }}
+					title='Log Send'
 					onPress={() => {
 						if (isSend) {
 							markSend(),
@@ -116,9 +99,128 @@ const RenderIndividualClimbs = ({
 									  )
 						}
 					}}
+					color='#50C878'
 				/>
-			</View>
-		</Card>
+			</SpeedDial>
+		)
+	}
+
+	const ToDoChip = () => {
+		const [toDoChip, setToDoChip] = useState(isToDo)
+		if (isToDo) {
+			return (
+				<Chip
+					title='To Do'
+					containerStyle={{
+						marginVertical: 15,
+						width: 100,
+					}}
+					buttonStyle={{ backgroundColor: '#3388FF' }}
+					icon={{
+						name: 'close',
+						type: 'font-awesome',
+						size: 20,
+						color: '#fff',
+					}}
+					onPress={() => {
+						Alert.alert(
+							`Delete?`,
+							`Remove ${climb.name} From To-Do List?`,
+							[
+								{
+									text: 'Cancel',
+									style: 'cancel',
+								},
+								{
+									text: 'OK',
+									onPress: () => {
+										markToDo()
+										Platform.OS === 'ios'
+											? Alert.alert(`${climb.name} removed from "To Do List"`)
+											: ToastAndroid.show(
+													`${climb.name} removed from "To Do List"`,
+													ToastAndroid.SHORT
+											  )
+									},
+								},
+							],
+							{ cancelable: false }
+						)
+					}}
+					iconRight
+				/>
+			)
+		} else {
+			return <></>
+		}
+	}
+
+	const SendChip = () => {
+		const [sendChip, setSendChip] = useState(isSend)
+
+		if (isSend) {
+			return (
+				<Chip
+					title='Sent'
+					containerStyle={{
+						marginVertical: 15,
+						width: 100,
+					}}
+					buttonStyle={{ backgroundColor: '#50C878' }}
+					icon={{
+						name: 'check',
+						type: 'font-awesome',
+						size: 20,
+						color: '#fff',
+					}}
+					iconRight
+				/>
+			)
+		} else {
+			return <></>
+		}
+	}
+
+	const { colors } = useTheme()
+
+	return climb ? (
+		<SafeAreaView style={{ flex: 1 }}>
+			<Card containerStyle={{ backgroundColor: colors.card }}>
+				<Card.Title
+					style={{ color: colors.text }}
+					h2
+				>
+					{climb.name}, {climb.grade}
+				</Card.Title>
+				<Card.Divider />
+				<View style={styles.cardImageView}>
+					<Image
+						style={styles.cardImage}
+						resizeMode='contain'
+						source={climb.image}
+					/>
+				</View>
+				<Card.Title
+					style={{ color: colors.text }}
+					h4
+				>
+					{climb.location}
+				</Card.Title>
+				<View style={{ marginBottom: 20 }}>
+					<Rating
+						startingValue={climb.rating}
+						readonly
+						style={{ alignItems: 'center' }}
+						tintColor={colors.card}
+					/>
+				</View>
+				<View style={styles.cardRow}>
+					<ToDoChip />
+					<SendChip />
+				</View>
+			</Card>
+			<SpeedDialIcon />
+		</SafeAreaView>
 	) : (
 		<View />
 	)
@@ -128,10 +230,7 @@ const styles = StyleSheet.create({
 	cardRow: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		flex: 1,
 		flexDirection: 'row',
-		margin: 20,
-		marginBottom: 30,
 	},
 	cardImageView: {
 		position: 'relative',
