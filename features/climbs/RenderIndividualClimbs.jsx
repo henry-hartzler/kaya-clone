@@ -6,7 +6,7 @@ import {
 	ToastAndroid,
 	SafeAreaView,
 } from 'react-native'
-import { Card, Icon, Rating, SpeedDial, Chip } from 'react-native-elements'
+import { Card, Rating, SpeedDial, Chip } from 'react-native-elements'
 import { useTheme } from '@react-navigation/native'
 import { useState } from 'react'
 
