@@ -44,35 +44,13 @@ const RenderIndividualClimbs = ({
 									},
 									{
 										text: 'OK',
-										onPress: () => {
-											markToDo(),
-												Platform.OS === 'ios'
-													? Alert.alert(`${climb.name} added to "To Do List"`)
-													: ToastAndroid.show(
-															`${climb.name} added to "To Do List"`,
-															ToastAndroid.SHORT
-													  )
-										},
+										onPress: () => markToDo(),
 									},
 								],
 								{ cancelable: false }
 							)
-						} else if (isToDo) {
-							markToDo()
-							Platform.OS === 'ios'
-								? Alert.alert(`${climb.name} removed from "To Do List"`)
-								: ToastAndroid.show(
-										`${climb.name} removed from "To Do List"`,
-										ToastAndroid.SHORT
-								  )
 						} else {
-							markToDo(),
-								Platform.OS === 'ios'
-									? Alert.alert(`${climb.name} added to "To Do List"`)
-									: ToastAndroid.show(
-											`${climb.name} added to "To Do List"`,
-											ToastAndroid.SHORT
-									  )
+							markToDo()
 						}
 					}}
 					color='#3388FF'
@@ -80,25 +58,7 @@ const RenderIndividualClimbs = ({
 				<SpeedDial.Action
 					icon={{ name: 'check', color: '#fff' }}
 					title='Log Send'
-					onPress={() => {
-						if (isSend) {
-							markSend(),
-								Platform.OS === 'ios'
-									? Alert.alert(`${climb.name} removed from "Sends"`)
-									: ToastAndroid.show(
-											`${climb.name} removed from "Sends"`,
-											ToastAndroid.SHORT
-									  )
-						} else {
-							markSend(),
-								Platform.OS === 'ios'
-									? Alert.alert(`${climb.name} added to "Sends"`)
-									: ToastAndroid.show(
-											`${climb.name} added to "Sends"`,
-											ToastAndroid.SHORT
-									  )
-						}
-					}}
+					onPress={() => markSend()}
 					color='#50C878'
 				/>
 			</SpeedDial>
@@ -133,15 +93,7 @@ const RenderIndividualClimbs = ({
 								},
 								{
 									text: 'OK',
-									onPress: () => {
-										markToDo()
-										Platform.OS === 'ios'
-											? Alert.alert(`${climb.name} removed from "To Do List"`)
-											: ToastAndroid.show(
-													`${climb.name} removed from "To Do List"`,
-													ToastAndroid.SHORT
-											  )
-									},
+									onPress: () => markToDo(),
 								},
 							],
 							{ cancelable: false }
