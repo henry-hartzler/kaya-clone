@@ -35,8 +35,8 @@ const RenderIndividualClimbs = ({
 					onPress={() => {
 						if (isSend) {
 							Alert.alert(
-								'Delete From Sends?',
-								`Adding ${climb.name} to your \n"To Do List" will remove it from your Sends.\n\nProceed?`,
+								'Add to To Do?',
+								`You have already sent ${climb.name} 👊 \nAdd it to your To Do List anyway?\n`,
 								[
 									{
 										text: 'Cancel',
@@ -85,7 +85,7 @@ const RenderIndividualClimbs = ({
 					onPress={() => {
 						Alert.alert(
 							`Delete?`,
-							`Remove ${climb.name} From To-Do List?`,
+							`Remove ${climb.name} From To Do List?`,
 							[
 								{
 									text: 'Cancel',

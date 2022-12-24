@@ -15,7 +15,6 @@ const sendsSlice = createSlice({
 			const sendToRemove = {
 				...action.payload,
 			}
-			console.log(sendToRemove)
 			return state.filter((climb) => climb.id !== sendToRemove.id)
 		},
 	},

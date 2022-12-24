@@ -23,16 +23,6 @@ const ToDoScreen = ({ navigation }) => {
 	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs.id))
 
 	const renderClimbItem = ({ item: climb }) => {
-		//these may be helpful in ClimbInfoScreen for the Speeddial
-		// const inToDoClimbs = toDos.includes(climb.id)
-		// const toggleSend = () => {
-		// 	if (inToDoClimbs) {
-		// 		dispatch(toggleToDo(climb.id))
-		// 		dispatch(toggleSends(climb.id))
-		// 	} else {
-		// 		dispatch(toggleSends(climb.id))
-		// 	}
-		// }
 		return (
 			<SwipeRow
 				disableRightSwipe
@@ -41,26 +31,7 @@ const ToDoScreen = ({ navigation }) => {
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
-					<TouchableOpacity
-						style={styles.deleteTouchable}
-						// onPress={() =>
-						// 	Alert.alert(
-						// 		'Delete To Do?',
-						// 		`Remove ${climb.name} from To Do List?`,
-						// 		[
-						// 			{
-						// 				text: 'Cancel',
-						// 				style: 'cancel',
-						// 			},
-						// 			{
-						// 				text: 'OK',
-						// 				onPress: () => dispatch(toggleToDo(climb.id)),
-						// 			},
-						// 		],
-						// 		{ cancelable: false }
-						// 	)
-						// }
-					>
+					<TouchableOpacity style={styles.deleteTouchable}>
 						<Icon
 							name='trash'
 							type='font-awesome'
