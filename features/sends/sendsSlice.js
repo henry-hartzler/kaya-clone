@@ -4,13 +4,6 @@ const sendsSlice = createSlice({
 	name: 'sends',
 	initialState: [],
 	reducers: {
-		toggleSends: (state, action) => {
-			if (state.some((e) => e.id === action.payload)) {
-				return state.filter((climb) => climb.id !== action.payload.id)
-			} else {
-				// state.push(action.payload)
-			}
-		},
 		logSend: (state, action) => {
 			const newSend = {
 				id: state.length,
@@ -28,5 +21,5 @@ const sendsSlice = createSlice({
 	},
 })
 
-export const { toggleSends, logSend, removeSend } = sendsSlice.actions
+export const { logSend, removeSend } = sendsSlice.actions
 export const sendsReducer = sendsSlice.reducer
