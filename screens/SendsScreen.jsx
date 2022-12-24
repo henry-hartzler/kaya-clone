@@ -15,16 +15,8 @@ import { useTheme } from '@react-navigation/native'
 
 const SendsScreen = ({ navigation }) => {
 	const { colors } = useTheme()
-
-	const { climbsArray } = useSelector((state) => state.climbs)
 	const sendsArray = useSelector((state) => state.sends)
-
-	const sends = useSelector((state) => state.sends)
 	const dispatch = useDispatch()
-
-	const sendClimbs = climbsArray.filter((climb) =>
-		sends.some((e) => e.name === climb.name)
-	)
 
 	const renderClimbItem = ({ item: climb }) => {
 		return (
@@ -32,32 +24,27 @@ const SendsScreen = ({ navigation }) => {
 				rightOpenValue={-80}
 				disableRightSwipe
 				rightActivationValue={-200}
-				onRightAction={() => {
-					dispatch(removeSend(climb)), console.log('ClimbToRemove: ' + climb)
-				}}
+				onRightAction={() =>
+					Alert.alert(
+						'Delete Send?',
+						`Remove this send of ${climb.name}?`,
+						[
+							{
+								text: 'Cancel',
+								style: 'cancel',
+							},
+							{
+								text: 'OK',
+								onPress: () => dispatch(removeSend(climb)),
+							},
+						],
+						{ cancelable: false }
+					)
+				}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
-					<TouchableOpacity
-						style={styles.deleteTouchable}
-						onPress={() =>
-							Alert.alert(
-								'Delete Send?',
-								`Remove ${climb.name} from Sends?`,
-								[
-									{
-										text: 'Cancel',
-										style: 'cancel',
-									},
-									{
-										text: 'OK',
-										onPress: () => dispatch(toggleSends(climb.id)),
-									},
-								],
-								{ cancelable: false }
-							)
-						}
-					>
+					<TouchableOpacity style={styles.deleteTouchable}>
 						<Icon
 							name='trash'
 							type='font-awesome'
@@ -88,7 +75,7 @@ const SendsScreen = ({ navigation }) => {
 						/>
 						<ListItem.Content>
 							<ListItem.Title style={{ color: colors.text }}>
-								{climb.name}, {climb.grade}, {climb.id}
+								{climb.name}, {climb.grade}
 							</ListItem.Title>
 							<ListItem.Subtitle style={{ color: colors.text }}>
 								{climb.location}
