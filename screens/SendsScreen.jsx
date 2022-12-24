@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleSends } from '../features/sends/sendsSlice'
+import { removeSend } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
@@ -17,11 +17,14 @@ const SendsScreen = ({ navigation }) => {
 	const { colors } = useTheme()
 
 	const { climbsArray } = useSelector((state) => state.climbs)
+	const sendsArray = useSelector((state) => state.sends)
 
 	const sends = useSelector((state) => state.sends)
 	const dispatch = useDispatch()
 
-	const sendClimbs = climbsArray.filter((climbs) => sends.includes(climbs.id))
+	const sendClimbs = climbsArray.filter((climb) =>
+		sends.some((e) => e.name === climb.name)
+	)
 
 	const renderClimbItem = ({ item: climb }) => {
 		return (
@@ -29,7 +32,9 @@ const SendsScreen = ({ navigation }) => {
 				rightOpenValue={-80}
 				disableRightSwipe
 				rightActivationValue={-200}
-				onRightAction={() => dispatch(toggleSends(climb.id))}
+				onRightAction={() => {
+					dispatch(removeSend(climb)), console.log('ClimbToRemove: ' + climb)
+				}}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
@@ -83,7 +88,7 @@ const SendsScreen = ({ navigation }) => {
 						/>
 						<ListItem.Content>
 							<ListItem.Title style={{ color: colors.text }}>
-								{climb.name}, {climb.grade}
+								{climb.name}, {climb.grade}, {climb.id}
 							</ListItem.Title>
 							<ListItem.Subtitle style={{ color: colors.text }}>
 								{climb.location}
@@ -101,7 +106,7 @@ const SendsScreen = ({ navigation }) => {
 				<Text style={styles.headerTitle}>Sends</Text>
 			</View>
 			<FlatList
-				data={sendClimbs}
+				data={sendsArray}
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>

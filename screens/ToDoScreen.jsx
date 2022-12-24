@@ -35,32 +35,31 @@ const ToDoScreen = ({ navigation }) => {
 		// }
 		return (
 			<SwipeRow
-				rightOpenValue={-80}
 				disableRightSwipe
-				rightActivationValue={-200}
+				rightActivationValue={-150}
 				onRightAction={() => dispatch(toggleToDo(climb.id))}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
 					<TouchableOpacity
 						style={styles.deleteTouchable}
-						onPress={() =>
-							Alert.alert(
-								'Delete To Do?',
-								`Remove ${climb.name} from To Do List?`,
-								[
-									{
-										text: 'Cancel',
-										style: 'cancel',
-									},
-									{
-										text: 'OK',
-										onPress: () => dispatch(toggleToDo(climb.id)),
-									},
-								],
-								{ cancelable: false }
-							)
-						}
+						// onPress={() =>
+						// 	Alert.alert(
+						// 		'Delete To Do?',
+						// 		`Remove ${climb.name} from To Do List?`,
+						// 		[
+						// 			{
+						// 				text: 'Cancel',
+						// 				style: 'cancel',
+						// 			},
+						// 			{
+						// 				text: 'OK',
+						// 				onPress: () => dispatch(toggleToDo(climb.id)),
+						// 			},
+						// 		],
+						// 		{ cancelable: false }
+						// 	)
+						// }
 					>
 						<Icon
 							name='trash'

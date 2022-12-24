@@ -1,18 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
 
 const sendsSlice = createSlice({
-	name: "sends",
+	name: 'sends',
 	initialState: [],
 	reducers: {
-		toggleSends: (sends, action) => {
-			if (sends.includes(action.payload)) {
-				return sends.filter((climb) => climb !== action.payload)
+		toggleSends: (state, action) => {
+			if (state.some((e) => e.id === action.payload)) {
+				return state.filter((climb) => climb.id !== action.payload.id)
 			} else {
-				sends.push(action.payload)
+				// state.push(action.payload)
 			}
+		},
+		logSend: (state, action) => {
+			const newSend = {
+				id: state.length,
+				...action.payload,
+			}
+			state.push(newSend)
+		},
+		removeSend: (state, action) => {
+			const sendToRemove = {
+				...action.payload,
+			}
+			console.log(sendToRemove)
+			return state.filter((climb) => climb.id !== sendToRemove.id)
 		},
 	},
 })
 
-export const { toggleSends } = sendsSlice.actions
+export const { toggleSends, logSend, removeSend } = sendsSlice.actions
 export const sendsReducer = sendsSlice.reducer
