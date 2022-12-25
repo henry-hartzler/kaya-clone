@@ -3,12 +3,21 @@ import {
 	View,
 	Image,
 	Alert,
-	ToastAndroid,
 	SafeAreaView,
+	Modal,
+	Text,
 } from 'react-native'
-import { Card, Rating, SpeedDial, Chip } from 'react-native-elements'
+import {
+	Card,
+	Rating,
+	SpeedDial,
+	Chip,
+	Button,
+	Input,
+} from 'react-native-elements'
 import { useTheme } from '@react-navigation/native'
 import { useState } from 'react'
+import DateTimePicker from '@react-native-community/datetimepicker'
 
 const RenderIndividualClimbs = ({
 	climb,
@@ -58,7 +67,8 @@ const RenderIndividualClimbs = ({
 				<SpeedDial.Action
 					icon={{ name: 'check', color: '#fff' }}
 					title='Log Send'
-					onPress={() => markSend()}
+					onPress={() => setModalVisible(!modalVisible)}
+					// onPress={() => markSend()}
 					color='#50C878'
 				/>
 			</SpeedDial>
@@ -66,7 +76,6 @@ const RenderIndividualClimbs = ({
 	}
 
 	const ToDoChip = () => {
-		const [toDoChip, setToDoChip] = useState(isToDo)
 		if (isToDo) {
 			return (
 				<Chip
@@ -108,8 +117,6 @@ const RenderIndividualClimbs = ({
 	}
 
 	const SendChip = () => {
-		const [sendChip, setSendChip] = useState(isSend)
-
 		if (isSend) {
 			return (
 				<Chip
@@ -134,6 +141,23 @@ const RenderIndividualClimbs = ({
 	}
 
 	const { colors } = useTheme()
+	const [modalVisible, setModalVisible] = useState(false)
+	const [comment, setComment] = useState('')
+	const [rating, setRating] = useState(5)
+	const [date, setDate] = useState(new Date())
+	const [showCalendar, setShowCalendar] = useState(false)
+
+	const onDateChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date
+		setShowCalendar(Platform.OS === 'ios')
+		setDate(currentDate)
+	}
+
+	const resetForm = () => {
+		setRating(5)
+		setComment('')
+		setDate(new Date())
+	}
 
 	return climb ? (
 		<SafeAreaView style={{ flex: 1 }}>
@@ -172,6 +196,93 @@ const RenderIndividualClimbs = ({
 				</View>
 			</Card>
 			<SpeedDialIcon />
+			<Modal
+				animationType='slide'
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => setModalVisible(!modalVisible)}
+			>
+				<View
+					style={{
+						backgroundColor: '#000',
+						position: 'absolute',
+						bottom: 0,
+						width: '100%',
+						alignItems: 'center',
+						justifyContent: 'flex-end',
+						borderColor: '#fff',
+						borderWidth: 2,
+						marginBottom: 20,
+					}}
+				>
+					<View style={styles.formTitle}>
+						<Text
+							style={{ color: colors.text, fontSize: 24, fontWeight: 'bold' }}
+						>
+							You sent! 👊
+						</Text>
+					</View>
+					<View style={styles.formTitle}>
+						<Text
+							style={{ color: colors.text, fontSize: 16, fontWeight: 'bold' }}
+						>
+							Add some details below to log your send.
+						</Text>
+					</View>
+					<View style={styles.formRow}>
+						<Text style={styles.formLabel}>Rating:</Text>
+						<Rating
+							startingValue={rating}
+							imageSize={40}
+							onFinishRating={(rating) => setRating(rating)}
+							style={{ paddingVertical: 10 }}
+							tintColor='#000'
+						/>
+					</View>
+					<View style={styles.formRow}>
+						<Text style={styles.formLabel}>Date:</Text>
+						<Button
+							onPress={() => setShowCalendar(!showCalendar)}
+							title={date.toLocaleDateString('en-US')}
+							buttonStyle={{ backgroundColor: '#FFFF00' }}
+							titleStyle={{ color: '#000' }}
+						/>
+					</View>
+					{showCalendar && (
+						<DateTimePicker
+							style={styles.formItem}
+							value={date}
+							mode='date'
+							display='default'
+							onChange={onDateChange}
+						/>
+					)}
+					<View style={styles.formRow}>
+						<Input
+							placeholder='Comment'
+							leftIcon={{
+								type: 'font-awesome',
+								name: 'comment-o',
+							}}
+							leftIconContainerStyle={{ paddingRight: 10 }}
+							onChangeText={(text) => setComment(text)}
+							value={comment}
+							inputStyle={{ color: colors.text }}
+						/>
+					</View>
+					<View style={styles.formRow}>
+						<Button
+							buttonStyle={{ backgroundColor: '#FFFF00', width: '100%' }}
+							titleStyle={{ color: '#000' }}
+							title='Done'
+							onPress={() => {
+								setModalVisible(!modalVisible), resetForm()
+							}}
+							size='lg'
+						/>
+					</View>
+				</View>
+			</Modal>
 		</SafeAreaView>
 	) : (
 		<View />
@@ -193,6 +304,30 @@ const styles = StyleSheet.create({
 	cardImage: {
 		width: '100%',
 		height: 175,
+	},
+	formRow: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		flex: 1,
+		flexDirection: 'row',
+		margin: 20,
+	},
+	formLabel: {
+		fontSize: 18,
+		flex: 2,
+		color: '#fff',
+	},
+	formItem: {
+		flex: 1,
+	},
+	formTitle: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		flex: 1,
+		flexDirection: 'row',
+		marginTop: 20,
+		marginBottom: 0,
+		marginHorizontal: 20,
 	},
 })
 
