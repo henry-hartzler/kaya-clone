@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native'
 import RenderIndividualClimbs from '../features/climbs/RenderIndividualClimbs'
 import ScreenHeader from '../features/header/ScreenHeader'
 import { toggleToDo } from '../features/ToDo/toDoSlice'
-import { logSend, removeSend } from '../features/sends/sendsSlice'
+import { logSend } from '../features/sends/sendsSlice'
 
 const ClimbInfoScreen = ({ route }) => {
 	const { climb } = route.params

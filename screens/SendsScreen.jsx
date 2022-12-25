@@ -23,7 +23,7 @@ const SendsScreen = ({ navigation }) => {
 			<SwipeRow
 				rightOpenValue={-80}
 				disableRightSwipe
-				rightActivationValue={-200}
+				rightActivationValue={-150}
 				onRightAction={() =>
 					Alert.alert(
 						'Delete Send?',
@@ -44,7 +44,26 @@ const SendsScreen = ({ navigation }) => {
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
-					<TouchableOpacity style={styles.deleteTouchable}>
+					<TouchableOpacity
+						style={styles.deleteTouchable}
+						onPress={() =>
+							Alert.alert(
+								'Delete Send?',
+								`Remove this send of ${climb.name}?`,
+								[
+									{
+										text: 'Cancel',
+										style: 'cancel',
+									},
+									{
+										text: 'OK',
+										onPress: () => dispatch(removeSend(climb)),
+									},
+								],
+								{ cancelable: false }
+							)
+						}
+					>
 						<Icon
 							name='trash'
 							type='font-awesome'

@@ -25,13 +25,49 @@ const ToDoScreen = ({ navigation }) => {
 	const renderClimbItem = ({ item: climb }) => {
 		return (
 			<SwipeRow
+				rightOpenValue={-80}
 				disableRightSwipe
 				rightActivationValue={-150}
-				onRightAction={() => dispatch(toggleToDo(climb.id))}
+				onRightAction={() =>
+					Alert.alert(
+						'Delete from To Do?',
+						`Remove ${climb.name} from To Do List?`,
+						[
+							{
+								text: 'Cancel',
+								style: 'cancel',
+							},
+							{
+								text: 'OK',
+								onPress: () => dispatch(toggleToDo(climb.id)),
+							},
+						],
+						{ cancelable: false }
+					)
+				}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
-					<TouchableOpacity style={styles.deleteTouchable}>
+					<TouchableOpacity
+						style={styles.deleteTouchable}
+						onPress={() =>
+							Alert.alert(
+								'Delete from To Do?',
+								`Remove ${climb.name} from To Do List?`,
+								[
+									{
+										text: 'Cancel',
+										style: 'cancel',
+									},
+									{
+										text: 'OK',
+										onPress: () => dispatch(toggleToDo(climb.id)),
+									},
+								],
+								{ cancelable: false }
+							)
+						}
+					>
 						<Icon
 							name='trash'
 							type='font-awesome'
