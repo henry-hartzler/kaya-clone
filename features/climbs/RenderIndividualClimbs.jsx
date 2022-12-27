@@ -18,6 +18,8 @@ import {
 import { useTheme } from '@react-navigation/native'
 import { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { useDispatch } from 'react-redux'
+import { logSend } from '../sends/sendsSlice'
 
 const RenderIndividualClimbs = ({
 	climb,
@@ -159,9 +161,27 @@ const RenderIndividualClimbs = ({
 		setDate(new Date())
 	}
 
+	const dispatch = useDispatch()
+
+	const handleSend = () => {
+		const send = {
+			name: climb.name,
+			grade: climb.grade,
+			image: climb.image,
+			location: climb.location,
+			rating: rating,
+			date: date.toLocaleDateString('en-US'),
+			comment: comment,
+		}
+		dispatch(logSend(send))
+		if (isToDo) {
+			markToDo()
+		}
+	}
+
 	return climb ? (
 		<SafeAreaView style={{ flex: 1 }}>
-			<Card containerStyle={{ backgroundColor: colors.card }}>
+			<Card containerStyle={{ backgroundColor: colors.card, borderWidth: 0 }}>
 				<Card.Title
 					style={{ color: colors.text }}
 					h2
@@ -210,8 +230,6 @@ const RenderIndividualClimbs = ({
 						width: '100%',
 						alignItems: 'center',
 						justifyContent: 'flex-end',
-						borderColor: '#fff',
-						borderWidth: 2,
 						marginBottom: 20,
 					}}
 				>
@@ -276,7 +294,7 @@ const RenderIndividualClimbs = ({
 							titleStyle={{ color: '#000' }}
 							title='Done'
 							onPress={() => {
-								setModalVisible(!modalVisible), resetForm()
+								handleSend(), setModalVisible(!modalVisible), resetForm()
 							}}
 							size='lg'
 						/>

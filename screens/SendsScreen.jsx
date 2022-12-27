@@ -7,7 +7,7 @@ import {
 	Alert,
 	SafeAreaView,
 } from 'react-native'
-import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
+import { ListItem, Avatar, Icon, FAB, Rating } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeSend } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
@@ -16,6 +16,9 @@ import { useTheme } from '@react-navigation/native'
 const SendsScreen = ({ navigation }) => {
 	const { colors } = useTheme()
 	const sendsArray = useSelector((state) => state.sends)
+	const sendsByDate = sendsArray.slice().sort(function (a, b) {
+		return new Date(b.date) - new Date(a.date)
+	})
 	const dispatch = useDispatch()
 
 	const renderClimbItem = ({ item: climb }) => {
@@ -99,6 +102,9 @@ const SendsScreen = ({ navigation }) => {
 							<ListItem.Subtitle style={{ color: colors.text }}>
 								{climb.location}
 							</ListItem.Subtitle>
+							<ListItem.Subtitle style={{ color: colors.text }}>
+								{climb.date}
+							</ListItem.Subtitle>
 						</ListItem.Content>
 						<ListItem.Chevron />
 					</ListItem>
@@ -112,7 +118,7 @@ const SendsScreen = ({ navigation }) => {
 				<Text style={styles.headerTitle}>Sends</Text>
 			</View>
 			<FlatList
-				data={sendsArray}
+				data={sendsByDate}
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>

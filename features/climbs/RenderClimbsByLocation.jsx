@@ -1,5 +1,5 @@
 import { Avatar, ListItem, Icon } from 'react-native-elements'
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
@@ -46,12 +46,14 @@ const RenderClimbsByLocation = ({ locations }) => {
 		)
 	}
 	return (
-		<FlatList
-			data={filteredClimbs}
-			renderItem={renderClimbItem}
-			keyExtractor={(item) => item.id.toString()}
-			style={{ marginTop: 10 }}
-		/>
+		<View style={{ paddingHorizontal: 15 }}>
+			<FlatList
+				data={filteredClimbs}
+				renderItem={renderClimbItem}
+				keyExtractor={(item) => item.id.toString()}
+				style={{ marginTop: 10 }}
+			/>
+		</View>
 	)
 }
 

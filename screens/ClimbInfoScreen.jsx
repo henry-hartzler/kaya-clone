@@ -3,7 +3,6 @@ import { SafeAreaView } from 'react-native'
 import RenderIndividualClimbs from '../features/climbs/RenderIndividualClimbs'
 import ScreenHeader from '../features/header/ScreenHeader'
 import { toggleToDo } from '../features/ToDo/toDoSlice'
-import { logSend } from '../features/sends/sendsSlice'
 
 const ClimbInfoScreen = ({ route }) => {
 	const { climb } = route.params
@@ -18,29 +17,14 @@ const ClimbInfoScreen = ({ route }) => {
 		dispatch(toggleToDo(climb.id))
 	}
 
-	const handleSend = () => {
-		const send = {
-			name: climb.name,
-			grade: climb.grade,
-			image: climb.image,
-			location: climb.location,
-			rating: climb.rating,
-		}
-		dispatch(logSend(send))
-		if (toDoClimbs) {
-			dispatch(toggleToDo(climb.id))
-		}
-	}
-
 	return (
-		<SafeAreaView style={{ backgroundColor: '#000', flex: 1 }}>
+		<SafeAreaView style={{ flex: 1 }}>
 			<ScreenHeader />
 			<RenderIndividualClimbs
 				climb={climb}
 				isToDo={toDos.includes(climb.id)}
 				isSend={sendsClimbs}
 				markToDo={() => toggleToDos()}
-				markSend={() => handleSend()}
 			/>
 		</SafeAreaView>
 	)
