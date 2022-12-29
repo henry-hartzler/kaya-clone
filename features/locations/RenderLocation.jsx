@@ -6,7 +6,7 @@ const RenderLocation = ({ location }) => {
 	const { colors } = useTheme()
 
 	return location ? (
-		<Card containerStyle={{ backgroundColor: colors.card }}>
+		<Card containerStyle={{ backgroundColor: colors.card, borderWidth: 0 }}>
 			<Card.Title
 				h2
 				style={{ color: colors.text }}
@@ -21,24 +21,6 @@ const RenderLocation = ({ location }) => {
 					source={location.image}
 				/>
 			</View>
-			{/* <View style={styles.cardRow}>
-				<Icon
-					name='heart-o'
-					type='font-awesome'
-					color='#f50'
-					raised
-					reverse
-					onPress={() => console.log("pressed")}
-				/>
-				<Icon
-					name='plus'
-					type='font-awesome'
-					color='#5637DD'
-					raised
-					reverse
-					onPress={() => console.log("pressed")}
-				/>
-			</View> */}
 		</Card>
 	) : (
 		<View />

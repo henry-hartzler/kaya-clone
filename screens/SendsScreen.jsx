@@ -7,26 +7,43 @@ import {
 	Alert,
 	SafeAreaView,
 } from 'react-native'
-import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { ListItem, Avatar, Icon, FAB, Rating } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleSends } from '../features/sends/sendsSlice'
+import { removeSend } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
 const SendsScreen = ({ navigation }) => {
 	const { colors } = useTheme()
-
-	const { climbsArray } = useSelector((state) => state.climbs)
-
-	const sends = useSelector((state) => state.sends)
+	const sendsArray = useSelector((state) => state.sends)
+	const sendsByDate = sendsArray.slice().sort(function (a, b) {
+		return new Date(b.date) - new Date(a.date)
+	})
 	const dispatch = useDispatch()
-
-	const sendClimbs = climbsArray.filter((climbs) => sends.includes(climbs.id))
 
 	const renderClimbItem = ({ item: climb }) => {
 		return (
 			<SwipeRow
-				rightOpenValue={-100}
+				rightOpenValue={-80}
+				disableRightSwipe
+				rightActivationValue={-150}
+				onRightAction={() =>
+					Alert.alert(
+						'Delete Send?',
+						`Remove this send of ${climb.name}?`,
+						[
+							{
+								text: 'Cancel',
+								style: 'cancel',
+							},
+							{
+								text: 'OK',
+								onPress: () => dispatch(removeSend(climb)),
+							},
+						],
+						{ cancelable: false }
+					)
+				}
 				style={{ marginVertical: 5 }}
 			>
 				<View style={styles.deleteView}>
@@ -35,7 +52,7 @@ const SendsScreen = ({ navigation }) => {
 						onPress={() =>
 							Alert.alert(
 								'Delete Send?',
-								`Remove ${climb.name} from Sends?`,
+								`Remove this send of ${climb.name}?`,
 								[
 									{
 										text: 'Cancel',
@@ -43,7 +60,7 @@ const SendsScreen = ({ navigation }) => {
 									},
 									{
 										text: 'OK',
-										onPress: () => dispatch(toggleSends(climb.id)),
+										onPress: () => dispatch(removeSend(climb)),
 									},
 								],
 								{ cancelable: false }
@@ -71,8 +88,12 @@ const SendsScreen = ({ navigation }) => {
 						}}
 					>
 						<Avatar
-							rounded
-							source={climb.image}
+							icon={{ name: 'landscape', type: 'material' }}
+							size={'medium'}
+							containerStyle={{
+								backgroundColor: colors.card,
+								color: colors.text,
+							}}
 						/>
 						<ListItem.Content>
 							<ListItem.Title style={{ color: colors.text }}>
@@ -81,7 +102,11 @@ const SendsScreen = ({ navigation }) => {
 							<ListItem.Subtitle style={{ color: colors.text }}>
 								{climb.location}
 							</ListItem.Subtitle>
+							<ListItem.Subtitle style={{ color: colors.text }}>
+								{climb.date}
+							</ListItem.Subtitle>
 						</ListItem.Content>
+						<ListItem.Chevron />
 					</ListItem>
 				</View>
 			</SwipeRow>
@@ -93,9 +118,16 @@ const SendsScreen = ({ navigation }) => {
 				<Text style={styles.headerTitle}>Sends</Text>
 			</View>
 			<FlatList
-				data={sendClimbs}
+				data={sendsByDate}
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
+			/>
+			<FAB
+				placement='right'
+				color='#FFFF00'
+				style={{ marginRight: 20, marginBottom: 20 }}
+				icon={{ name: 'add', color: '#000' }}
+				onPress={() => navigation.navigate('Search')}
 			/>
 		</SafeAreaView>
 	)
@@ -111,14 +143,14 @@ const styles = StyleSheet.create({
 	deleteTouchable: {
 		backgroundColor: 'red',
 		height: '100%',
-		width: 100,
+		width: '90%',
 		justifyContent: 'center',
 	},
 	deleteText: {
 		color: 'white',
 		fontWeight: '700',
-		textAlign: 'center',
-		width: 100,
+		textAlign: 'right',
+		width: '80%',
 	},
 	screen: {
 		flex: 1,

@@ -7,10 +7,9 @@ import {
 	Alert,
 	SafeAreaView,
 } from 'react-native'
-import { ListItem, Avatar, Icon } from 'react-native-elements'
+import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleToDo } from '../features/ToDo/toDoSlice'
-import { toggleSends } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
@@ -18,60 +17,42 @@ const ToDoScreen = ({ navigation }) => {
 	const { colors } = useTheme()
 
 	const { climbsArray } = useSelector((state) => state.climbs)
+
 	const toDos = useSelector((state) => state.toDos)
 	const dispatch = useDispatch()
 	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs.id))
 
 	const renderClimbItem = ({ item: climb }) => {
-		const inToDoClimbs = toDos.includes(climb.id)
-		const toggleSend = () => {
-			if (inToDoClimbs) {
-				dispatch(toggleToDo(climb.id))
-				dispatch(toggleSends(climb.id))
-			} else {
-				dispatch(toggleSends(climb.id))
-			}
-		}
 		return (
 			<SwipeRow
-				rightOpenValue={-100}
-				leftOpenValue={100}
+				rightOpenValue={-80}
+				disableRightSwipe
+				rightActivationValue={-150}
+				onRightAction={() =>
+					Alert.alert(
+						'Delete from To Do?',
+						`Remove ${climb.name} from To Do List?`,
+						[
+							{
+								text: 'Cancel',
+								style: 'cancel',
+							},
+							{
+								text: 'OK',
+								onPress: () => dispatch(toggleToDo(climb.id)),
+							},
+						],
+						{ cancelable: false }
+					)
+				}
 				style={{ marginVertical: 5 }}
 			>
-				<View style={styles.swipeView}>
-					<TouchableOpacity
-						style={styles.addTouchable}
-						onPress={() =>
-							Alert.alert(
-								`Congrats on your send! 👊`,
-								`Did you send ${climb.name}?`,
-								[
-									{
-										text: 'No',
-										style: 'cancel',
-									},
-									{
-										text: 'Yes',
-										onPress: () => toggleSend(),
-									},
-								],
-								{ cancelable: false }
-							)
-						}
-					>
-						<Icon
-							name='check'
-							type='font-awesome'
-							size={25}
-							iconStyle={styles.deleteText}
-							color='#fff'
-						/>
-					</TouchableOpacity>
+				<View style={styles.deleteView}>
 					<TouchableOpacity
 						style={styles.deleteTouchable}
 						onPress={() =>
 							Alert.alert(
-								'Delete To Do?',
+								'Delete from To Do?',
 								`Remove ${climb.name} from To Do List?`,
 								[
 									{
@@ -108,8 +89,12 @@ const ToDoScreen = ({ navigation }) => {
 						}}
 					>
 						<Avatar
-							rounded
-							source={climb.image}
+							icon={{ name: 'landscape', type: 'material' }}
+							size={'medium'}
+							containerStyle={{
+								backgroundColor: colors.card,
+								color: colors.text,
+							}}
 						/>
 						<ListItem.Content>
 							<ListItem.Title style={{ color: colors.text }}>
@@ -119,6 +104,7 @@ const ToDoScreen = ({ navigation }) => {
 								{climb.location}
 							</ListItem.Subtitle>
 						</ListItem.Content>
+						<ListItem.Chevron />
 					</ListItem>
 				</View>
 			</SwipeRow>
@@ -134,40 +120,35 @@ const ToDoScreen = ({ navigation }) => {
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>
+			<FAB
+				placement='right'
+				color='#FFFF00'
+				style={{ marginRight: 20, marginBottom: 20 }}
+				icon={{ name: 'add', color: '#000' }}
+				onPress={() => navigation.navigate('Search')}
+			/>
 		</SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
-	swipeView: {
+	deleteView: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'flex-end',
 		alignItems: 'center',
 		flex: 1,
-	},
-	addTouchable: {
-		backgroundColor: 'blue',
-		height: '100%',
-		width: 100,
-		justifyContent: 'center',
-	},
-	addText: {
-		color: 'white',
-		fontWeight: '700',
-		textAlign: 'center',
-		width: 100,
 	},
 	deleteTouchable: {
 		backgroundColor: 'red',
 		height: '100%',
-		width: 100,
+		width: '90%',
 		justifyContent: 'center',
 	},
 	deleteText: {
 		color: 'white',
 		fontWeight: '700',
-		textAlign: 'center',
-		width: 100,
+		textAlign: 'right',
+		width: '80%',
 	},
 	screen: {
 		flex: 1,

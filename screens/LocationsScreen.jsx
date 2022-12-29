@@ -21,8 +21,12 @@ const LocationsScreen = ({ navigation }) => {
 				}}
 			>
 				<Avatar
-					rounded
-					source={location.image}
+					icon={{ name: 'place', type: 'material' }}
+					size={'medium'}
+					containerStyle={{
+						backgroundColor: colors.card,
+						color: colors.text,
+					}}
 				/>
 				<ListItem.Content>
 					<ListItem.Title style={{ color: colors.text }}>
@@ -32,6 +36,7 @@ const LocationsScreen = ({ navigation }) => {
 						{location.state}
 					</ListItem.Subtitle>
 				</ListItem.Content>
+				<ListItem.Chevron />
 			</ListItem>
 		)
 	}

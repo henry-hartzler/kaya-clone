@@ -1,5 +1,5 @@
-import { Avatar, ListItem } from 'react-native-elements'
-import { FlatList, StyleSheet } from 'react-native'
+import { Avatar, ListItem, Icon } from 'react-native-elements'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
@@ -19,7 +19,6 @@ const RenderClimbsByLocation = ({ locations }) => {
 					backgroundColor: colors.card,
 					color: colors.text,
 					marginVertical: 5,
-					marginHorizontal: 20,
 				}}
 				key={climb.id}
 				onPress={() => {
@@ -27,27 +26,34 @@ const RenderClimbsByLocation = ({ locations }) => {
 				}}
 			>
 				<Avatar
-					rounded
-					source={climb.image}
+					icon={{ name: 'landscape', type: 'material' }}
+					size={'medium'}
+					containerStyle={{
+						backgroundColor: colors.card,
+						color: colors.text,
+					}}
 				/>
 				<ListItem.Content>
 					<ListItem.Title style={{ color: colors.text }}>
-						{climb.name}
+						{climb.name}, {climb.grade}
 					</ListItem.Title>
 					<ListItem.Subtitle style={{ color: colors.text }}>
-						{climb.grade}
+						{climb.location}
 					</ListItem.Subtitle>
 				</ListItem.Content>
+				<ListItem.Chevron />
 			</ListItem>
 		)
 	}
 	return (
-		<FlatList
-			data={filteredClimbs}
-			renderItem={renderClimbItem}
-			keyExtractor={(item) => item.id.toString()}
-			style={{ marginTop: 10 }}
-		/>
+		<View style={{ paddingHorizontal: 15 }}>
+			<FlatList
+				data={filteredClimbs}
+				renderItem={renderClimbItem}
+				keyExtractor={(item) => item.id.toString()}
+				style={{ marginTop: 10 }}
+			/>
+		</View>
 	)
 }
 

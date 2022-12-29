@@ -1,14 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
 
 const toDoSlice = createSlice({
-	name: "toDo",
+	name: 'toDo',
 	initialState: [],
 	reducers: {
-		toggleToDo: (toDo, action) => {
-			if (toDo.includes(action.payload)) {
-				return toDo.filter((climb) => climb !== action.payload)
+		toggleToDo: (state, action) => {
+			if (state.includes(action.payload)) {
+				return state.filter((climb) => climb !== action.payload)
 			} else {
-				toDo.push(action.payload)
+				state.push(action.payload)
 			}
 		},
 	},
