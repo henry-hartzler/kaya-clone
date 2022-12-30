@@ -3,9 +3,7 @@ import { FlatList, StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { baseUrl } from '../../shared/baseUrl'
+import { Loading } from '../../components/LoadingComponent'
 
 const RenderClimbsByLocation = ({ locations }) => {
 	const { colors } = useTheme()
