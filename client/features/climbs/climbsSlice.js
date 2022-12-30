@@ -12,19 +12,20 @@ const climbsSlice = createSlice({
 	name: 'climbs',
 	initialState: { isLoading: true, errMess: null, climbsArray: [] },
 	reducers: {},
-	extraReducers: {
-		[fetchClimbs.pending]: (state) => {
-			state.isLoading = true
-		},
-		[fetchClimbs.fulfilled]: (state, action) => {
-			state.isLoading = false
-			state.errMess = null
-			state.climbsArray = action.payload
-		},
-		[fetchClimbs.rejected]: (state, action) => {
-			state.isLoading = false
-			state.errMess = action.error ? action.error.message : 'Fetch failed'
-		},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchClimbs.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(fetchClimbs.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.errMess = null
+				state.climbsArray = action.payload
+			})
+			.addCase(fetchClimbs.rejected, (state, action) => {
+				state.isLoading = false
+				state.errMess = action.error ? action.error.message : 'Fetch failed'
+			})
 	},
 })
 

@@ -27,7 +27,9 @@
 		"react-native-swipe-list-view": "^3.2.9",
 		"react-navigation": "^4.4.4",
 		"react-redux": "^8.0.5",
-		"redux": "^4.2.0"
+		"redux": "^4.2.0",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.4.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9"
