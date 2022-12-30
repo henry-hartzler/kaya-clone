@@ -3,11 +3,12 @@ const { MongoClient } = require('mongodb')
 let db
 
 const app = express()
+app.set('view engine', 'ejs')
+app.set('views', './views')
 
 app.get('/', async (req, res) => {
 	const allClimbs = await db.collection('climbs').find().toArray()
-	console.log(allClimbs)
-	res.send('Hello World!')
+	res.render('home', { allClimbs })
 })
 
 const start = async () => {
