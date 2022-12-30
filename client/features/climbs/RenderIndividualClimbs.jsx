@@ -168,7 +168,7 @@ const RenderIndividualClimbs = ({
 		const send = {
 			name: climb.name,
 			grade: climb.grade,
-			image: climb.image,
+			// image: climb.image,
 			location: climb.location,
 			rating: rating,
 			date: date.toLocaleDateString('en-US'),
