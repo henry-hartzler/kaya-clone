@@ -15,7 +15,7 @@ const LocationsScreen = ({ navigation }) => {
 					color: colors.text,
 					marginVertical: 5,
 				}}
-				key={location.id}
+				key={location._id}
 				onPress={() => {
 					navigation.navigate('LocationInfo', { location })
 				}}
@@ -68,7 +68,7 @@ const LocationsScreen = ({ navigation }) => {
 			<FlatList
 				data={locations.locationsArray}
 				renderItem={renderLocationItem}
-				keyExtractor={(item) => item.id.toString()}
+				keyExtractor={(item) => item._id.toString()}
 			/>
 		</SafeAreaView>
 	)

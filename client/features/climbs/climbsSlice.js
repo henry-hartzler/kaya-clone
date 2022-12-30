@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { CLIMBS } from '../../shared/climbs'
 import { baseUrl } from '../../shared/baseUrl'
 import axios from 'axios'
 

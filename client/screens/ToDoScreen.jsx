@@ -20,7 +20,7 @@ const ToDoScreen = ({ navigation }) => {
 
 	const toDos = useSelector((state) => state.toDos)
 	const dispatch = useDispatch()
-	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs.id))
+	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs._id))
 
 	const renderClimbItem = ({ item: climb }) => {
 		return (
@@ -39,7 +39,7 @@ const ToDoScreen = ({ navigation }) => {
 							},
 							{
 								text: 'OK',
-								onPress: () => dispatch(toggleToDo(climb.id)),
+								onPress: () => dispatch(toggleToDo(climb._id)),
 							},
 						],
 						{ cancelable: false }
@@ -61,7 +61,7 @@ const ToDoScreen = ({ navigation }) => {
 									},
 									{
 										text: 'OK',
-										onPress: () => dispatch(toggleToDo(climb.id)),
+										onPress: () => dispatch(toggleToDo(climb._id)),
 									},
 								],
 								{ cancelable: false }
@@ -83,7 +83,7 @@ const ToDoScreen = ({ navigation }) => {
 							backgroundColor: colors.card,
 							color: colors.text,
 						}}
-						key={climb.id}
+						key={climb._id}
 						onPress={() => {
 							navigation.navigate('ClimbInfo', { climb })
 						}}
@@ -118,7 +118,7 @@ const ToDoScreen = ({ navigation }) => {
 			<FlatList
 				data={toDoClimbs}
 				renderItem={renderClimbItem}
-				keyExtractor={(item) => item.id.toString()}
+				keyExtractor={(item) => item._id.toString()}
 			/>
 			<FAB
 				placement='right'

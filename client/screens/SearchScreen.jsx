@@ -41,7 +41,7 @@ const SearchScreen = ({ navigation }) => {
 					color: colors.text,
 					marginVertical: 5,
 				}}
-				key={location.id}
+				key={location._id}
 				onPress={() => {
 					navigation.navigate('LocationInfo', { location })
 				}}
