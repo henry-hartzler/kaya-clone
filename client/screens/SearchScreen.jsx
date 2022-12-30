@@ -120,13 +120,13 @@ const SearchScreen = ({ navigation }) => {
 						<FlatList
 							data={filteredLocations}
 							renderItem={renderLocationItem}
-							keyExtractor={(item) => item.id.toString()}
+							keyExtractor={(item) => item._id.toString()}
 						/>
 						<Text style={{ color: colors.text }}>Climbs</Text>
 						<FlatList
 							data={filteredClimbs}
 							renderItem={renderClimbItem}
-							keyExtractor={(item) => item.id.toString()}
+							keyExtractor={(item) => item._id.toString()}
 						/>
 					</>
 				) : (

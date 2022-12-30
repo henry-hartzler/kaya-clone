@@ -120,7 +120,7 @@ const SendsScreen = ({ navigation }) => {
 			<FlatList
 				data={sendsByDate}
 				renderItem={renderClimbItem}
-				keyExtractor={(item) => item.id.toString()}
+				keyExtractor={(item) => item._id.toString()}
 			/>
 			<FAB
 				placement='right'
