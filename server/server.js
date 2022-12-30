@@ -11,6 +11,11 @@ app.get('/', async (req, res) => {
 	res.render('home', { allClimbs })
 })
 
+app.get('/api/climbs', async (req, res) => {
+	const allClimbs = await db.collection('climbs').find().toArray()
+	res.json(allClimbs)
+})
+
 const start = async () => {
 	const client = new MongoClient('mongodb://localhost:27017/kaya-clone')
 	await client.connect()
