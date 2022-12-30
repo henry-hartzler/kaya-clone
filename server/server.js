@@ -6,6 +6,7 @@ const config = require('./config')
 
 const climbRouter = require('./routes/climbRouter')
 const locationRouter = require('./routes/locationRouter')
+const toDoRouter = require('./routes/toDoRouter')
 
 const mongoose = require('mongoose')
 const url = config.mongoUrl
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/climbs', climbRouter)
 app.use('/locations', locationRouter)
+app.use('/toDos', toDoRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

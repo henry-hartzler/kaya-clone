@@ -18,7 +18,7 @@ const ToDoScreen = ({ navigation }) => {
 
 	const { climbsArray } = useSelector((state) => state.climbs)
 
-	const toDos = useSelector((state) => state.toDos)
+	const toDos = useSelector((state) => state.toDos.toDosArray)
 	const dispatch = useDispatch()
 	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs._id))
 

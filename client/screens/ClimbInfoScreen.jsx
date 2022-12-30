@@ -6,9 +6,10 @@ import { toggleToDo } from '../features/ToDo/toDoSlice'
 
 const ClimbInfoScreen = ({ route }) => {
 	const { climb } = route.params
-	const toDos = useSelector((state) => state.toDos)
+	const toDos = useSelector((state) => state.toDos.toDosArray)
 	const sends = useSelector((state) => state.sends)
 	const sendsClimbs = sends.some((e) => e.name === climb.name)
+	const toDoClimbs = toDos.includes(climb._id)
 
 	const dispatch = useDispatch()
 
@@ -21,7 +22,7 @@ const ClimbInfoScreen = ({ route }) => {
 			<ScreenHeader />
 			<RenderIndividualClimbs
 				climb={climb}
-				isToDo={toDos.includes(climb._id)}
+				isToDo={toDoClimbs}
 				isSend={sendsClimbs}
 				markToDo={() => toggleToDos()}
 			/>
