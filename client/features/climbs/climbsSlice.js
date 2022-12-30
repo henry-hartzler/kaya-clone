@@ -4,7 +4,7 @@ import { baseUrl } from '../../shared/baseUrl'
 import axios from 'axios'
 
 export const fetchClimbs = createAsyncThunk('climbs/fetchClimbs', async () => {
-	const response = await axios.get(baseUrl + 'api/climbs')
+	const response = await axios.get(baseUrl + 'climbs')
 	return response.data
 })
 
