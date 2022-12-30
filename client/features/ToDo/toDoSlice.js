@@ -13,7 +13,9 @@ const toDoSlice = createSlice({
 	reducers: {
 		toggleToDo: (state, action) => {
 			if (state.toDosArray.includes(action.payload)) {
-				return state.toDosArray.filter((climb) => climb !== action.payload)
+				state.toDosArray = state.toDosArray.filter(
+					(climb) => climb !== action.payload
+				)
 			} else {
 				state.toDosArray.push(action.payload)
 			}
