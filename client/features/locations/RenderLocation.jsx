@@ -1,5 +1,5 @@
 import { StyleSheet, View, Image } from 'react-native'
-import { Card } from 'react-native-elements'
+import { Card, Icon } from 'react-native-elements'
 import { useTheme } from '@react-navigation/native'
 
 const RenderLocation = ({ location }) => {
@@ -15,10 +15,15 @@ const RenderLocation = ({ location }) => {
 			</Card.Title>
 			<Card.Divider />
 			<View style={styles.cardImageView}>
-				<Image
+				{/* <Image
 					style={styles.cardImage}
 					resizeMode='contain'
 					source={location.image}
+				/> */}
+				<Icon
+					name='place'
+					type='material'
+					iconStyle={{ color: colors.text, fontSize: 150 }}
 				/>
 			</View>
 		</Card>

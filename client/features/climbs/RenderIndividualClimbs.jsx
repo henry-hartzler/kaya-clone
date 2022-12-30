@@ -14,6 +14,7 @@ import {
 	Chip,
 	Button,
 	Input,
+	Icon,
 } from 'react-native-elements'
 import { useTheme } from '@react-navigation/native'
 import { useState } from 'react'
@@ -190,10 +191,15 @@ const RenderIndividualClimbs = ({
 				</Card.Title>
 				<Card.Divider />
 				<View style={styles.cardImageView}>
-					<Image
+					{/* <Image
 						style={styles.cardImage}
 						resizeMode='contain'
 						source={climb.image}
+					/> */}
+					<Icon
+						name='landscape'
+						type='material'
+						iconStyle={{ color: colors.text, fontSize: 150 }}
 					/>
 				</View>
 				<Card.Title
