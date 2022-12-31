@@ -12,6 +12,7 @@ import ClimbInfoScreen from './ClimbInfoScreen'
 import { fetchClimbs } from '../features/climbs/climbsSlice'
 import { fetchLocations } from '../features/locations/locationsSlice'
 import { fetchToDos } from '../features/ToDo/toDoSlice'
+import { fetchSends } from '../features/sends/sendsSlice'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -92,6 +93,7 @@ const Main = () => {
 		dispatch(fetchClimbs())
 		dispatch(fetchLocations())
 		dispatch(fetchToDos())
+		dispatch(fetchSends())
 	}, [dispatch])
 
 	return (

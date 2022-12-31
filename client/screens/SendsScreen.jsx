@@ -15,8 +15,8 @@ import { useTheme } from '@react-navigation/native'
 
 const SendsScreen = ({ navigation }) => {
 	const { colors } = useTheme()
-	const sendsArray = useSelector((state) => state.sends)
-	const sendsByDate = sendsArray.slice().sort(function (a, b) {
+	const sends = useSelector((state) => state.sends.sendsArray)
+	const sendsByDate = sends.slice().sort(function (a, b) {
 		return new Date(b.date) - new Date(a.date)
 	})
 	const dispatch = useDispatch()
@@ -82,7 +82,7 @@ const SendsScreen = ({ navigation }) => {
 							backgroundColor: colors.card,
 							color: colors.text,
 						}}
-						key={climb.id}
+						key={climb._id}
 						onPress={() => {
 							navigation.navigate('ClimbInfo', { climb })
 						}}

@@ -20,7 +20,7 @@ import { useTheme } from '@react-navigation/native'
 import { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useDispatch } from 'react-redux'
-import { logSend } from '../sends/sendsSlice'
+import { postSend } from '../sends/sendsSlice'
 import { postToDo, deleteToDo } from '../ToDo/toDoSlice'
 
 const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
@@ -39,6 +39,22 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 			climbId: climb._id,
 		}
 		dispatch(deleteToDo(toDoClimb))
+	}
+
+	const handleSend = () => {
+		const send = {
+			climbId: climb._id,
+			name: climb.name,
+			grade: climb.grade,
+			location: climb.location,
+			rating: rating,
+			date: date.toLocaleDateString('en-US'),
+			comment: comment,
+		}
+		dispatch(postSend(send))
+		if (isToDo) {
+			handleRemoveToDo()
+		}
 	}
 
 	const SpeedDialIcon = () => {
@@ -173,22 +189,6 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 		setRating(5)
 		setComment('')
 		setDate(new Date())
-	}
-
-	const handleSend = () => {
-		const send = {
-			name: climb.name,
-			grade: climb.grade,
-			// image: climb.image,
-			location: climb.location,
-			rating: rating,
-			date: date.toLocaleDateString('en-US'),
-			comment: comment,
-		}
-		dispatch(logSend(send))
-		if (isToDo) {
-			handleRemoveToDo()
-		}
 	}
 
 	return climb ? (

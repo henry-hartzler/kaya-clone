@@ -26,9 +26,9 @@ export const deleteToDo = createAsyncThunk(
 	'toDos/deleteToDo',
 	async (toDoClimb) => {
 		try {
-			const response = await axios.delete(
-				`${baseUrl}todos/${toDoClimb.climbId}`
-			)
+			const response = await axios.delete(`${baseUrl}todos`, {
+				climbId: toDoClimb.climbId,
+			})
 			return response.data
 		} catch (err) {
 			console.error(err)

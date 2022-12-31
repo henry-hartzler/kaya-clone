@@ -24,9 +24,18 @@ toDoRouter
 			})
 			.catch((err) => next(err))
 	})
+	.delete((req, res, next) => {
+		ToDo.deleteOne({ climbId: `${req.body.climbId}` })
+			.then((resp) => {
+				res.statusCode = 200
+				res.setHeader('Content-Type', 'application/json')
+				res.json(resp)
+			})
+			.catch((err) => next(err))
+	})
 
 toDoRouter.route('/:climbId').delete((req, res, next) => {
-	ToDo.findByIdAndDelete(req.params.climbId)
+	ToDo.findByIdAndDelete('63af215c39a4a16c3f0a0348')
 		.then((resp) => {
 			res.statusCode = 200
 			res.setHeader('Content-Type', 'application/json')
