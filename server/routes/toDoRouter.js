@@ -25,4 +25,14 @@ toDoRouter
 			.catch((err) => next(err))
 	})
 
+toDoRouter.route('/:climbId').delete((req, res, next) => {
+	ToDo.deleteOne({ climbId: req.params.climbId })
+		.then((response) => {
+			res.statusCode = 200
+			res.setHeader('Content-Type', 'application/json')
+			res.json(response)
+		})
+		.catch((err) => next(err))
+})
+
 module.exports = toDoRouter

@@ -22,6 +22,20 @@ export const postToDo = createAsyncThunk(
 	}
 )
 
+export const deleteToDo = createAsyncThunk(
+	'toDos/deleteToDo',
+	async (toDoClimb) => {
+		try {
+			const response = await axios.delete(
+				`${baseUrl}todos/${toDoClimb.climbId}`
+			)
+			return response.data
+		} catch (err) {
+			console.error(err)
+		}
+	}
+)
+
 const toDoSlice = createSlice({
 	name: 'toDo',
 	initialState: { isLoading: true, errMess: null, toDosArray: [] },
@@ -60,6 +74,20 @@ const toDoSlice = createSlice({
 			.addCase(postToDo.rejected, (state, action) => {
 				state.isLoading = false
 				state.errMess = action.error ? action.error.message : 'Post failed'
+			})
+			.addCase(deleteToDo.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(deleteToDo.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.errMess = null
+				state.toDosArray = state.toDosArray.filter(
+					(climb) => climb !== action.payload
+				)
+			})
+			.addCase(deleteToDo.rejected, (state, action) => {
+				state.isLoading = false
+				state.errMess = action.error ? action.error.message : 'Delete failed'
 			})
 	},
 })

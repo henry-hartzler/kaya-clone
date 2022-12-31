@@ -10,8 +10,6 @@ const ClimbInfoScreen = ({ route }) => {
 	const sendsClimbs = sends.some((e) => e.name === climb.name)
 	const toDoClimbs = toDos.some((e) => e.climbId === climb._id)
 
-	console.log(toDoClimbs)
-
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScreenHeader />
