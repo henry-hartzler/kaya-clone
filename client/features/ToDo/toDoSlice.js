@@ -55,7 +55,7 @@ const toDoSlice = createSlice({
 			.addCase(postToDo.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.errMess = null
-				state.toDosArray = action.payload
+				state.toDosArray.push(action.payload)
 			})
 			.addCase(postToDo.rejected, (state, action) => {
 				state.isLoading = false

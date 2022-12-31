@@ -16,12 +16,12 @@ import { useTheme } from '@react-navigation/native'
 const ToDoScreen = ({ navigation }) => {
 	const { colors } = useTheme()
 
-	const { climbsArray } = useSelector((state) => state.climbs)
+	const climbsArray = useSelector((state) => state.climbs.climbsArray)
 
 	const toDos = useSelector((state) => state.toDos.toDosArray)
 	const dispatch = useDispatch()
 	const toDoClimbs = climbsArray.filter((climb) =>
-		toDos.some((e) => e.climbId === climb._id.toString())
+		toDos.some((e) => e.climbId === climb._id)
 	)
 
 	const renderClimbItem = ({ item: climb }) => {

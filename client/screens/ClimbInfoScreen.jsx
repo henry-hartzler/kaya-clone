@@ -8,7 +8,7 @@ const ClimbInfoScreen = ({ route }) => {
 	const toDos = useSelector((state) => state.toDos.toDosArray)
 	const sends = useSelector((state) => state.sends)
 	const sendsClimbs = sends.some((e) => e.name === climb.name)
-	const toDoClimbs = toDos.some((e) => e.name === climb.name)
+	const toDoClimbs = toDos.some((e) => e.climbId === climb._id)
 
 	console.log(toDoClimbs)
 
