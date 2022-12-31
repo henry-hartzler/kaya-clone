@@ -26,11 +26,11 @@ toDoRouter
 	})
 
 toDoRouter.route('/:climbId').delete((req, res, next) => {
-	ToDo.deleteOne({ climbId: req.params.climbId })
-		.then((response) => {
+	ToDo.findByIdAndDelete(req.params.climbId)
+		.then((resp) => {
 			res.statusCode = 200
 			res.setHeader('Content-Type', 'application/json')
-			res.json(response)
+			res.json(resp)
 		})
 		.catch((err) => next(err))
 })

@@ -11,7 +11,7 @@ import LocationInfoScreen from './LocationInfoScreen'
 import ClimbInfoScreen from './ClimbInfoScreen'
 import { fetchClimbs } from '../features/climbs/climbsSlice'
 import { fetchLocations } from '../features/locations/locationsSlice'
-import { deleteToDo, fetchToDos } from '../features/ToDo/toDoSlice'
+import { fetchToDos } from '../features/ToDo/toDoSlice'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -92,7 +92,6 @@ const Main = () => {
 		dispatch(fetchClimbs())
 		dispatch(fetchLocations())
 		dispatch(fetchToDos())
-		dispatch(deleteToDo())
 	}, [dispatch])
 
 	return (

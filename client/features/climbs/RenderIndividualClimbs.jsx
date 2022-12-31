@@ -37,7 +37,6 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 	const handleRemoveToDo = () => {
 		const toDoClimb = {
 			climbId: climb._id,
-			name: climb.name,
 		}
 		dispatch(deleteToDo(toDoClimb))
 	}

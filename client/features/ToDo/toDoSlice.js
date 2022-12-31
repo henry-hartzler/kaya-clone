@@ -82,7 +82,7 @@ const toDoSlice = createSlice({
 				state.isLoading = false
 				state.errMess = null
 				state.toDosArray = state.toDosArray.filter(
-					(climb) => climb !== action.payload
+					(climb) => climb._id !== action.payload
 				)
 			})
 			.addCase(deleteToDo.rejected, (state, action) => {
