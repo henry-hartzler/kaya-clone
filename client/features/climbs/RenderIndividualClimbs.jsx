@@ -28,7 +28,7 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 
 	const handleAddToDo = () => {
 		const toDoClimb = {
-			climbId: climb._id.toString(),
+			climbId: climb._id,
 			name: climb.name,
 		}
 		dispatch(postToDo(toDoClimb))
