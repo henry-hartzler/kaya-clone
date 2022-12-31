@@ -7,18 +7,22 @@ export const fetchToDos = createAsyncThunk('toDos/fetchToDos', async () => {
 	return response.data
 })
 
+export const postToDos = createAsyncThunk('toDos/postToDos', async () => {
+	const response = await axios.post(baseUrl + 'toDos')
+	return response.data
+})
+
 const toDoSlice = createSlice({
 	name: 'toDo',
 	initialState: { isLoading: true, errMess: null, toDosArray: [] },
 	reducers: {
-		toggleToDo: (state, action) => {
-			if (state.toDosArray.includes(action.payload)) {
-				state.toDosArray = state.toDosArray.filter(
-					(climb) => climb !== action.payload
-				)
-			} else {
-				state.toDosArray.push(action.payload)
-			}
+		addToDo: (state, action) => {
+			state.toDosArray.push(action.payload)
+		},
+		removeToDo: (state, action) => {
+			state.toDosArray = state.toDosArray.filter(
+				(climb) => climb !== action.payload
+			)
 		},
 	},
 	extraReducers: (builder) => {
@@ -38,5 +42,5 @@ const toDoSlice = createSlice({
 	},
 })
 
-export const { toggleToDo } = toDoSlice.actions
+export const { addToDo, removeToDo } = toDoSlice.actions
 export const toDoReducer = toDoSlice.reducer

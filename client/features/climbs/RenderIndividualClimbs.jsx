@@ -21,14 +21,11 @@ import { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useDispatch } from 'react-redux'
 import { logSend } from '../sends/sendsSlice'
+import { addToDo, removeToDo } from '../ToDo/toDoSlice'
 
-const RenderIndividualClimbs = ({
-	climb,
-	isToDo,
-	markToDo,
-	markSend,
-	isSend,
-}) => {
+const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
+	const dispatch = useDispatch()
+
 	const SpeedDialIcon = () => {
 		const [open, setOpen] = useState(false)
 		return (
@@ -56,13 +53,13 @@ const RenderIndividualClimbs = ({
 									},
 									{
 										text: 'OK',
-										onPress: () => markToDo(),
+										onPress: () => dispatch(addToDo(climb._id)),
 									},
 								],
 								{ cancelable: false }
 							)
 						} else {
-							markToDo()
+							dispatch(addToDo(climb._id))
 						}
 					}}
 					color='#3388FF'
@@ -71,7 +68,6 @@ const RenderIndividualClimbs = ({
 					icon={{ name: 'check', color: '#fff' }}
 					title='Log Send'
 					onPress={() => setModalVisible(!modalVisible)}
-					// onPress={() => markSend()}
 					color='#50C878'
 				/>
 			</SpeedDial>
@@ -105,7 +101,7 @@ const RenderIndividualClimbs = ({
 								},
 								{
 									text: 'OK',
-									onPress: () => markToDo(),
+									onPress: () => dispatch(removeToDo(climb._id)),
 								},
 							],
 							{ cancelable: false }
@@ -162,8 +158,6 @@ const RenderIndividualClimbs = ({
 		setDate(new Date())
 	}
 
-	const dispatch = useDispatch()
-
 	const handleSend = () => {
 		const send = {
 			name: climb.name,
@@ -176,7 +170,7 @@ const RenderIndividualClimbs = ({
 		}
 		dispatch(logSend(send))
 		if (isToDo) {
-			markToDo()
+			dispatch(removeToDo(climb._id))
 		}
 	}
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SafeAreaView } from 'react-native'
 import RenderIndividualClimbs from '../features/climbs/RenderIndividualClimbs'
 import ScreenHeader from '../features/header/ScreenHeader'
-import { toggleToDo } from '../features/ToDo/toDoSlice'
+import { addToDo, removeToDo } from '../features/ToDo/toDoSlice'
 
 const ClimbInfoScreen = ({ route }) => {
 	const { climb } = route.params
@@ -13,10 +13,6 @@ const ClimbInfoScreen = ({ route }) => {
 
 	const dispatch = useDispatch()
 
-	const toggleToDos = () => {
-		dispatch(toggleToDo(climb._id))
-	}
-
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScreenHeader />
@@ -24,7 +20,6 @@ const ClimbInfoScreen = ({ route }) => {
 				climb={climb}
 				isToDo={toDoClimbs}
 				isSend={sendsClimbs}
-				markToDo={() => toggleToDos()}
 			/>
 		</SafeAreaView>
 	)

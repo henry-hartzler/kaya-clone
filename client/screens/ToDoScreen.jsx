@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleToDo } from '../features/ToDo/toDoSlice'
+import { removeToDo } from '../features/ToDo/toDoSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
@@ -39,7 +39,7 @@ const ToDoScreen = ({ navigation }) => {
 							},
 							{
 								text: 'OK',
-								onPress: () => dispatch(toggleToDo(climb._id)),
+								onPress: () => dispatch(removeToDo(climb._id)),
 							},
 						],
 						{ cancelable: false }
@@ -61,7 +61,7 @@ const ToDoScreen = ({ navigation }) => {
 									},
 									{
 										text: 'OK',
-										onPress: () => dispatch(toggleToDo(climb._id)),
+										onPress: () => dispatch(removeToDo(climb._id)),
 									},
 								],
 								{ cancelable: false }
