@@ -20,7 +20,9 @@ const ToDoScreen = ({ navigation }) => {
 
 	const toDos = useSelector((state) => state.toDos.toDosArray)
 	const dispatch = useDispatch()
-	const toDoClimbs = climbsArray.filter((climbs) => toDos.includes(climbs._id))
+	const toDoClimbs = climbsArray.filter((climb) =>
+		toDos.some((e) => e.climbId === climb._id.toString())
+	)
 
 	const renderClimbItem = ({ item: climb }) => {
 		return (

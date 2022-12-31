@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/climbs', climbRouter)
 app.use('/locations', locationRouter)
-app.use('/toDos', toDoRouter)
+app.use('/todos', toDoRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

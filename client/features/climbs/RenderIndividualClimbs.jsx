@@ -21,10 +21,18 @@ import { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useDispatch } from 'react-redux'
 import { logSend } from '../sends/sendsSlice'
-import { addToDo, removeToDo } from '../ToDo/toDoSlice'
+import { postToDo, removeToDo } from '../ToDo/toDoSlice'
 
 const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 	const dispatch = useDispatch()
+
+	const handleAddToDo = () => {
+		const toDoClimb = {
+			climbId: climb._id.toString(),
+			name: climb.name,
+		}
+		dispatch(postToDo(toDoClimb))
+	}
 
 	const SpeedDialIcon = () => {
 		const [open, setOpen] = useState(false)
@@ -53,13 +61,15 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 									},
 									{
 										text: 'OK',
-										onPress: () => dispatch(addToDo(climb._id)),
+										onPress: () => {
+											handleAddToDo(), setOpen(!open)
+										},
 									},
 								],
 								{ cancelable: false }
 							)
 						} else {
-							dispatch(addToDo(climb._id))
+							handleAddToDo(), setOpen(!open)
 						}
 					}}
 					color='#3388FF'
