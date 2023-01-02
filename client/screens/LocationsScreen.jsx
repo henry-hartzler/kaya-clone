@@ -130,7 +130,7 @@ const LocationsScreen = ({ navigation }) => {
 							width: '100%',
 							alignItems: 'center',
 							justifyContent: 'flex-end',
-							marginBottom: 40,
+							marginBottom: 10,
 						}}
 					>
 						<View style={styles.formTitle}>
