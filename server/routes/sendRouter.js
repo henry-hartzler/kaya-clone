@@ -15,6 +15,7 @@ sendRouter
 			.catch((err) => next(err))
 	})
 	.post((req, res, next) => {
+		console.log('REQ BODY:', req.body)
 		Send.create(req.body)
 			.then((sends) => {
 				console.log('Send: ', sends)

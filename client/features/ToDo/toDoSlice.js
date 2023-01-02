@@ -9,7 +9,7 @@ export const fetchToDos = createAsyncThunk('toDos/fetchToDos', async () => {
 
 export const postToDo = createAsyncThunk(
 	'toDos/postToDo',
-	async (toDoClimb) => {
+	async (toDoClimb, { dispatch }) => {
 		try {
 			const response = await axios.post(baseUrl + 'todos', toDoClimb)
 			return response.data
@@ -23,9 +23,7 @@ export const deleteToDo = createAsyncThunk(
 	'toDos/deleteToDo',
 	async (toDoClimb) => {
 		try {
-			const response = await axios.delete(`${baseUrl}todos`, {
-				climbId: toDoClimb.climbId,
-			})
+			const response = await axios.delete(`${baseUrl}todos`, toDoClimb)
 			return response.data
 		} catch (err) {
 			console.error(err)
