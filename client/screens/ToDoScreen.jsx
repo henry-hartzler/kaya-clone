@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { ListItem, Avatar, Icon, FAB } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeToDo } from '../features/ToDo/toDoSlice'
+import { deleteToDo } from '../features/ToDo/toDoSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
@@ -25,6 +25,13 @@ const ToDoScreen = ({ navigation }) => {
 	)
 
 	const renderClimbItem = ({ item: climb }) => {
+		const handleRemoveToDo = () => {
+			const toDoClimb = {
+				climbId: climb._id,
+			}
+			dispatch(deleteToDo(toDoClimb))
+		}
+
 		return (
 			<SwipeRow
 				rightOpenValue={-80}
@@ -41,7 +48,7 @@ const ToDoScreen = ({ navigation }) => {
 							},
 							{
 								text: 'OK',
-								onPress: () => dispatch(removeToDo(climb._id)),
+								onPress: () => handleRemoveToDo(),
 							},
 						],
 						{ cancelable: false }
@@ -63,7 +70,7 @@ const ToDoScreen = ({ navigation }) => {
 									},
 									{
 										text: 'OK',
-										onPress: () => dispatch(removeToDo(climb._id)),
+										onPress: () => handleRemoveToDo(),
 									},
 								],
 								{ cancelable: false }
