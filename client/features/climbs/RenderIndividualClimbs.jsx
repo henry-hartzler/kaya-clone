@@ -57,6 +57,25 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 		}
 	}
 
+	const { colors } = useTheme()
+	const [modalVisible, setModalVisible] = useState(false)
+	const [comment, setComment] = useState('')
+	const [rating, setRating] = useState(5)
+	const [date, setDate] = useState(new Date())
+	const [showCalendar, setShowCalendar] = useState(false)
+
+	const onDateChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date
+		setShowCalendar(Platform.OS === 'ios')
+		setDate(currentDate)
+	}
+
+	const resetForm = () => {
+		setRating(5)
+		setComment('')
+		setDate(new Date())
+	}
+
 	const SpeedDialIcon = () => {
 		const [open, setOpen] = useState(false)
 		return (
@@ -170,25 +189,6 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 		} else {
 			return <></>
 		}
-	}
-
-	const { colors } = useTheme()
-	const [modalVisible, setModalVisible] = useState(false)
-	const [comment, setComment] = useState('')
-	const [rating, setRating] = useState(5)
-	const [date, setDate] = useState(new Date())
-	const [showCalendar, setShowCalendar] = useState(false)
-
-	const onDateChange = (event, selectedDate) => {
-		const currentDate = selectedDate || date
-		setShowCalendar(Platform.OS === 'ios')
-		setDate(currentDate)
-	}
-
-	const resetForm = () => {
-		setRating(5)
-		setComment('')
-		setDate(new Date())
 	}
 
 	return climb ? (

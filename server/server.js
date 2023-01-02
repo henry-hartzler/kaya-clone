@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const config = require('./config')
+const path = require('path')
 // const { MongoClient } = require('mongodb')
 // let db
 
@@ -18,8 +19,9 @@ connect.then(
 )
 
 const app = express()
-app.set('view engine', 'ejs')
-app.set('views', './views')
+
+app.set('view engine', 'jade')
+app.set('views', path.join(__dirname, 'views'))
 
 app.use(logger('dev'))
 app.use(express.json())

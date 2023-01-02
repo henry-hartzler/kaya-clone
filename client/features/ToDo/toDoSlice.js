@@ -11,10 +11,7 @@ export const postToDo = createAsyncThunk(
 	'toDos/postToDo',
 	async (toDoClimb) => {
 		try {
-			const response = await axios.post(baseUrl + 'todos', {
-				climbId: toDoClimb.climbId,
-				name: toDoClimb.name,
-			})
+			const response = await axios.post(baseUrl + 'todos', toDoClimb)
 			return response.data
 		} catch (err) {
 			console.error(err)

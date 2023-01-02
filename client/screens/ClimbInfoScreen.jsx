@@ -8,16 +8,16 @@ const ClimbInfoScreen = ({ route }) => {
 	const toDos = useSelector((state) => state.toDos.toDosArray)
 	const sends = useSelector((state) => state.sends.sendsArray)
 	// const sendsClimbs = sends.some((e) => e.name === climb.name)
-	const sendsClimbs = sends.some((e) => e.climbId === climb._id)
-	const toDoClimbs = toDos.some((e) => e.climbId === climb._id)
+	// const sendsClimbs = sends.some((e) => e.climbId === climb._id)
+	// const toDoClimbs = toDos.some((e) => e.climbId === climb._id)
 
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<ScreenHeader />
 			<RenderIndividualClimbs
 				climb={climb}
-				isToDo={toDoClimbs}
-				isSend={sendsClimbs}
+				isToDo={true}
+				isSend={true}
 			/>
 		</SafeAreaView>
 	)

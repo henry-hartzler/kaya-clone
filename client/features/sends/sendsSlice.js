@@ -9,20 +9,13 @@ export const fetchSends = createAsyncThunk('sends/fetchSends', async () => {
 
 export const postSend = createAsyncThunk('sends/postSend', async (send) => {
 	try {
-		const response = await axios.post(baseUrl + 'sends', {
-			climbId: send.climbId,
-			name: send.name,
-			grade: send.grade,
-			location: send.location,
-			rating: send.rating,
-			date: send.date,
-			comment: send.comment,
-		})
+		const response = await axios.post(baseUrl + 'sends', send)
 		return response.data
 	} catch (err) {
 		console.error(err)
 	}
 })
+
 const sendsSlice = createSlice({
 	name: 'sends',
 	initialState: { isLoading: true, errMess: null, sendsArray: [] },
