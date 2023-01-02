@@ -6,22 +6,22 @@ const climbSchema = new Schema(
 		name: {
 			type: String,
 			required: true,
-			unique: true,
+			unique: false,
 		},
 		grade: {
 			type: String,
 			required: true,
-			unique: true,
+			unique: false,
 		},
 		location: {
 			type: String,
 			required: true,
-			unique: true,
+			unique: false,
 		},
 		rating: {
 			type: Number,
 			required: true,
-			unique: true,
+			unique: false,
 		},
 	},
 	{

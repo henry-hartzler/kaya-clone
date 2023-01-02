@@ -6,6 +6,7 @@ import {
 	SafeAreaView,
 	Modal,
 	Text,
+	TouchableOpacity,
 } from 'react-native'
 import {
 	Card,
@@ -239,84 +240,89 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 				visible={modalVisible}
 				onRequestClose={() => setModalVisible(!modalVisible)}
 			>
-				<View
-					style={{
-						backgroundColor: '#000',
-						position: 'absolute',
-						bottom: 0,
-						width: '100%',
-						alignItems: 'center',
-						justifyContent: 'flex-end',
-						marginBottom: 20,
-					}}
+				<TouchableOpacity
+					style={{ flex: 1 }}
+					onPress={() => setModalVisible(!modalVisible)}
 				>
-					<View style={styles.formTitle}>
-						<Text
-							style={{ color: colors.text, fontSize: 24, fontWeight: 'bold' }}
-						>
-							You sent! 👊
-						</Text>
+					<View
+						style={{
+							backgroundColor: '#000',
+							position: 'absolute',
+							bottom: 0,
+							width: '100%',
+							alignItems: 'center',
+							justifyContent: 'flex-end',
+							marginBottom: 20,
+						}}
+					>
+						<View style={styles.formTitle}>
+							<Text
+								style={{ color: colors.text, fontSize: 24, fontWeight: 'bold' }}
+							>
+								You sent! 👊
+							</Text>
+						</View>
+						<View style={styles.formTitle}>
+							<Text
+								style={{ color: colors.text, fontSize: 16, fontWeight: 'bold' }}
+							>
+								Add some details below to log your send.
+							</Text>
+						</View>
+						<View style={styles.formRow}>
+							<Text style={styles.formLabel}>Rating:</Text>
+							<Rating
+								startingValue={rating}
+								imageSize={40}
+								onFinishRating={(rating) => setRating(rating)}
+								style={{ paddingVertical: 10 }}
+								tintColor='#000'
+							/>
+						</View>
+						<View style={styles.formRow}>
+							<Text style={styles.formLabel}>Date:</Text>
+							<Button
+								onPress={() => setShowCalendar(!showCalendar)}
+								title={date.toLocaleDateString('en-US')}
+								buttonStyle={{ backgroundColor: '#FFFF00' }}
+								titleStyle={{ color: '#000' }}
+							/>
+						</View>
+						{showCalendar && (
+							<DateTimePicker
+								style={styles.formItem}
+								value={date}
+								mode='date'
+								display='default'
+								onChange={onDateChange}
+							/>
+						)}
+						<View style={styles.formRow}>
+							<Input
+								placeholder='Comment'
+								leftIcon={{
+									type: 'font-awesome',
+									name: 'comment-o',
+								}}
+								leftIconContainerStyle={{ paddingRight: 10 }}
+								onChangeText={(text) => setComment(text)}
+								value={comment}
+								inputStyle={{ color: colors.text }}
+							/>
+						</View>
+						<View style={styles.formRow}>
+							<Button
+								buttonStyle={{ backgroundColor: '#FFFF00', width: '100%' }}
+								titleStyle={{ color: '#000' }}
+								title='Done'
+								onPress={() => {
+									handleSend(), setModalVisible(!modalVisible), resetForm()
+								}}
+								size='lg'
+							/>
+						</View>
 					</View>
-					<View style={styles.formTitle}>
-						<Text
-							style={{ color: colors.text, fontSize: 16, fontWeight: 'bold' }}
-						>
-							Add some details below to log your send.
-						</Text>
-					</View>
-					<View style={styles.formRow}>
-						<Text style={styles.formLabel}>Rating:</Text>
-						<Rating
-							startingValue={rating}
-							imageSize={40}
-							onFinishRating={(rating) => setRating(rating)}
-							style={{ paddingVertical: 10 }}
-							tintColor='#000'
-						/>
-					</View>
-					<View style={styles.formRow}>
-						<Text style={styles.formLabel}>Date:</Text>
-						<Button
-							onPress={() => setShowCalendar(!showCalendar)}
-							title={date.toLocaleDateString('en-US')}
-							buttonStyle={{ backgroundColor: '#FFFF00' }}
-							titleStyle={{ color: '#000' }}
-						/>
-					</View>
-					{showCalendar && (
-						<DateTimePicker
-							style={styles.formItem}
-							value={date}
-							mode='date'
-							display='default'
-							onChange={onDateChange}
-						/>
-					)}
-					<View style={styles.formRow}>
-						<Input
-							placeholder='Comment'
-							leftIcon={{
-								type: 'font-awesome',
-								name: 'comment-o',
-							}}
-							leftIconContainerStyle={{ paddingRight: 10 }}
-							onChangeText={(text) => setComment(text)}
-							value={comment}
-							inputStyle={{ color: colors.text }}
-						/>
-					</View>
-					<View style={styles.formRow}>
-						<Button
-							buttonStyle={{ backgroundColor: '#FFFF00', width: '100%' }}
-							titleStyle={{ color: '#000' }}
-							title='Done'
-							onPress={() => {
-								handleSend(), setModalVisible(!modalVisible), resetForm()
-							}}
-							size='lg'
-						/>
-					</View>
-				</View>
+				</TouchableOpacity>
 			</Modal>
 		</SafeAreaView>
 	) : (
