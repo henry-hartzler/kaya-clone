@@ -42,6 +42,9 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 	}
 
 	const handleSend = () => {
+		if (isToDo) {
+			handleRemoveToDo()
+		}
 		const send = {
 			climbId: climb._id,
 			name: climb.name,
@@ -52,9 +55,6 @@ const RenderIndividualClimbs = ({ climb, isToDo, isSend }) => {
 			comment: comment,
 		}
 		dispatch(postSend(send))
-		if (isToDo) {
-			handleRemoveToDo()
-		}
 	}
 
 	const { colors } = useTheme()
