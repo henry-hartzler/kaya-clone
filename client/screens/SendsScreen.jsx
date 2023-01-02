@@ -118,7 +118,7 @@ const SendsScreen = ({ navigation }) => {
 				<Text style={styles.headerTitle}>Sends</Text>
 			</View>
 			<FlatList
-				data={sends}
+				data={sendsByDate}
 				renderItem={renderClimbItem}
 				keyExtractor={(item) => item._id.toString()}
 			/>

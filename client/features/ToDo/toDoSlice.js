@@ -9,7 +9,7 @@ export const fetchToDos = createAsyncThunk('toDos/fetchToDos', async () => {
 
 export const postToDo = createAsyncThunk(
 	'toDos/postToDo',
-	async (toDoClimb, { dispatch }) => {
+	async (toDoClimb) => {
 		try {
 			const response = await axios.post(baseUrl + 'todos', toDoClimb)
 			return response.data
