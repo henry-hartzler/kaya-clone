@@ -10,6 +10,18 @@ export const fetchLocations = createAsyncThunk(
 	}
 )
 
+export const postLocation = createAsyncThunk(
+	'locations/postLocation',
+	async (location) => {
+		try {
+			const response = await axios.post(baseUrl + 'locations', location)
+			return response.data
+		} catch (err) {
+			console.error(err)
+		}
+	}
+)
+
 const locationsSlice = createSlice({
 	name: 'locations',
 	initialState: { isLoading: true, errMess: null, locationsArray: [] },
@@ -27,6 +39,18 @@ const locationsSlice = createSlice({
 			.addCase(fetchLocations.rejected, (state, action) => {
 				state.isLoading = false
 				state.errMess = action.error ? action.error.message : 'Fetch failed'
+			})
+			.addCase(postLocation.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(postLocation.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.errMess = null
+				state.locationsArray.push(action.payload)
+			})
+			.addCase(postLocation.rejected, (state, action) => {
+				state.isLoading = false
+				state.errMess = action.error ? action.error.message : 'Post failed'
 			})
 	},
 })
