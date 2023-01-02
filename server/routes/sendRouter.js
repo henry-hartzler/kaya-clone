@@ -26,4 +26,15 @@ sendRouter
 			.catch((err) => next(err))
 	})
 
+sendRouter.route('/:climbId').delete((req, res, next) => {
+	Send.findOneAndDelete({ _id: req.params.climbId })
+		.then((send) => {
+			console.log('SEND: ', send)
+			res.statusCode = 200
+			res.setHeader('Content-Type', 'application/json')
+			res.json(send._id.toString())
+		})
+		.catch((err) => next(err))
+})
+
 module.exports = sendRouter

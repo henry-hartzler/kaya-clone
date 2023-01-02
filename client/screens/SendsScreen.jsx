@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { ListItem, Avatar, Icon, FAB, Rating } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeSend } from '../features/sends/sendsSlice'
+import { deleteSend } from '../features/sends/sendsSlice'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import { useTheme } from '@react-navigation/native'
 
@@ -22,6 +22,13 @@ const SendsScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 
 	const renderClimbItem = ({ item: climb }) => {
+		const handleRemoveSend = () => {
+			const sendClimb = {
+				climbId: climb._id,
+			}
+			dispatch(deleteSend(sendClimb))
+		}
+
 		return (
 			<SwipeRow
 				rightOpenValue={-80}
@@ -38,7 +45,7 @@ const SendsScreen = ({ navigation }) => {
 							},
 							{
 								text: 'OK',
-								onPress: () => dispatch(removeSend(climb)),
+								onPress: () => handleRemoveSend(),
 							},
 						],
 						{ cancelable: false }
@@ -60,7 +67,7 @@ const SendsScreen = ({ navigation }) => {
 									},
 									{
 										text: 'OK',
-										onPress: () => dispatch(removeSend(climb)),
+										onPress: () => handleRemoveSend(),
 									},
 								],
 								{ cancelable: false }
