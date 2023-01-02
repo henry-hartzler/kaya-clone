@@ -17,7 +17,6 @@ toDoRouter
 	.post((req, res, next) => {
 		ToDo.create(req.body)
 			.then((toDo) => {
-				console.log('ToDo: ', toDo)
 				res.statusCode = 200
 				res.setHeader('Content-Type', 'application/json')
 				res.json(toDo)
@@ -25,23 +24,14 @@ toDoRouter
 			.catch((err) => next(err))
 	})
 	.delete((req, res, next) => {
-		ToDo.deleteOne({ climbId: `${req.body.climbId}` })
-			.then((resp) => {
+		ToDo.findOneAndDelete()
+			.then((toDo) => {
+				console.log('TODO: ', toDo._id.toString())
 				res.statusCode = 200
 				res.setHeader('Content-Type', 'application/json')
-				res.json(resp)
+				res.json(toDo._id)
 			})
 			.catch((err) => next(err))
 	})
-
-toDoRouter.route('/:climbId').delete((req, res, next) => {
-	ToDo.findByIdAndDelete('63af215c39a4a16c3f0a0348')
-		.then((resp) => {
-			res.statusCode = 200
-			res.setHeader('Content-Type', 'application/json')
-			res.json(resp)
-		})
-		.catch((err) => next(err))
-})
 
 module.exports = toDoRouter

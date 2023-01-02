@@ -23,7 +23,7 @@ export const deleteToDo = createAsyncThunk(
 	'toDos/deleteToDo',
 	async (toDoClimb) => {
 		try {
-			const response = await axios.delete(`${baseUrl}todos`, toDoClimb)
+			const response = await axios.delete(baseUrl + 'todos', toDoClimb)
 			return response.data
 		} catch (err) {
 			console.error(err)
@@ -76,8 +76,16 @@ const toDoSlice = createSlice({
 			.addCase(deleteToDo.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.errMess = null
+				console.log(
+					'HOWWWWWWWWWDY THERE! HERE IS THE STATE of the toDosArray: ',
+					state.toDosArray
+				)
+				console.log(
+					'HELLOOOOOOOO THERE THIS IS THE PAYLOAD HERE: ',
+					action.payload
+				)
 				state.toDosArray = state.toDosArray.filter(
-					(climb) => climb._id !== action.payload
+					(climb) => climb._id.toString() !== action.payload
 				)
 			})
 			.addCase(deleteToDo.rejected, (state, action) => {
