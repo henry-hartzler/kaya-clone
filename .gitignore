@@ -1,2 +1,7 @@
 node_modules
 .DS_Store
+.expo
+.vscode
+data
+env
+config.js
