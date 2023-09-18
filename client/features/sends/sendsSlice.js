@@ -77,8 +77,6 @@ const sendsSlice = createSlice({
 			.addCase(deleteSend.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.errMess = null
-				console.log('sendsArray: ', state.sendsArray)
-				console.log('PAYLOAD: ', action.payload)
 				state.sendsArray = state.sendsArray.filter(
 					(climb) => climb._id.toString() !== action.payload
 				)
