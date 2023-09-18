@@ -79,14 +79,6 @@ const toDoSlice = createSlice({
 			.addCase(deleteToDo.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.errMess = null
-				console.log(
-					'HOWWWWWWWWWDY THERE! HERE IS THE STATE of the toDosArray: ',
-					state.toDosArray
-				)
-				console.log(
-					'HELLOOOOOOOO THERE THIS IS THE PAYLOAD HERE: ',
-					action.payload
-				)
 				state.toDosArray = state.toDosArray.filter(
 					(climb) => climb._id.toString() !== action.payload
 				)
