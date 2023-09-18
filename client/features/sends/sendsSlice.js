@@ -20,7 +20,6 @@ export const deleteSend = createAsyncThunk(
 	'sends/deleteSend',
 	async (sendClimb) => {
 		try {
-			console.log('HELLLLOOOOOOO IM THE SEND CLIMB', sendClimb)
 			const response = await axios.delete(
 				baseUrl + 'sends/' + `${sendClimb.climbId}`,
 				sendClimb
@@ -78,14 +77,8 @@ const sendsSlice = createSlice({
 			.addCase(deleteSend.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.errMess = null
-				console.log(
-					'HOWWWWWWWWWDY THERE! HERE IS THE STATE of the sendsArray: ',
-					state.sendsArray
-				)
-				console.log(
-					'HELLOOOOOOOO THERE THIS IS THE PAYLOAD HERE: ',
-					action.payload
-				)
+				console.log('sendsArray: ', state.sendsArray)
+				console.log('PAYLOAD: ', action.payload)
 				state.sendsArray = state.sendsArray.filter(
 					(climb) => climb._id.toString() !== action.payload
 				)
